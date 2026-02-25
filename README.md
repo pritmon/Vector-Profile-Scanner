@@ -1,4 +1,4 @@
-# Beginner TensorFlow Project
+# Vector Profile Scanner
 
 This is a beginner-friendly project using TensorFlow to classify Google AI Engineer skills vs. non-relevant skills.
 
