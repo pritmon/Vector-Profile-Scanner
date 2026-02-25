@@ -120,3 +120,26 @@ This document serves as an internal reference for the technical decisions, archi
 *   **Different Brain Types:** ChatGPT is a *Generative* model (a storyteller)—it generates totally new sentences, and sometimes it gets confused and just confidently makes up a lie (a hallucination) because it wants to finish the story.
 *   **Our Model:** Our `Sequential` model is an *Analytical/Discriminative* model (a security guard). It doesn't create sentences; it simply looks at an ID (the tokens) and outputs a percentage (e.g., "I am 90% sure this is a Google Skill").
 *   **The False Positive:** Because it only outputs a math percentage from 0% to 100%, it cannot "hallucinate" a fake skill. The worst mistake it can make is a "False Positive"—acting like an overly eager security guard who mistakenly lets a regular employee into a VIP room.
+
+## 9. TensorFlow & Market Demands
+
+**Q: Why choose TensorFlow/Keras over PyTorch for this specific project?**
+**A:**
+*   **The Market Reality:** While PyTorch is extremely popular for *academic research* and building brand new experimental architectures, TensorFlow (paired with Keras) absolutely dominates *Enterprise Production*.
+*   **The Project Need:** For a production-ready application like our Vector Profile Scanner, we don't need to invent new math; we need rapid deployment, stable APIs, and easy serving (like TF Serving or TFLite for mobile).
+*   **The Analogy:** PyTorch is a highly customizable laboratory for a mad scientist to build new engines from scratch. TensorFlow is the massive Toyota factory that quickly and reliably builds 1,000 standard cars every day for the real world.
+
+**Q: Why is saving the model as `.keras` important compared to older `.h5` formats?**
+**A:**
+*   **The Evolution:** In modern TensorFlow (version 2.13+), the official and safest way to save a model is utilizing the new, native `.keras` format (which we use in our project!).
+*   **The Benefit:** The older `.h5` format sometimes struggled to accurately save custom layers (like our `TextVectorization` layer).
+*   **The Modern Standard:** Using `.keras` proves to an employer that you are up-to-date with modern 2024+ ML engineering standards rather than relying on outdated 2019 tutorials.
+
+**Q: What is a "Tensor" and why is the framework named after it?**
+**A:**
+*   **The Concept:** A "Tensor" is just a fancy mathematical word for a multi-dimensional array or a grid of numbers. 
+    *   A single number (Speed: 50) is a *Scalar*.
+    *   A list of numbers (Coordinates: [10, 20]) is a *Vector*.
+    *   A grid of numbers (An image with pixels) is a *Matrix*.
+    *   Once you stack grids on top of grids (like video frames), we just simplify and call everything a *Tensor*.
+*   **The Flow:** The framework is named "TensorFlow" because data (represented as these number grids) literally "flows" continuously through the layers of the neural network during training.
