@@ -2,6 +2,14 @@
 
 This is a beginner-friendly project using TensorFlow to classify Google AI Engineer skills vs. non-relevant skills. It is built using the industry-standard structure for Machine Learning projects.
 
+## Tech Stack
+- **Language**: Python 3.9+
+- **Machine Learning Framework**: TensorFlow / Keras (Sequential Models, TextVectorization)
+- **Data Modification**: Pandas & CSV Parsing
+- **Data Exploration**: Jupyter Notebooks & Matplotlib
+- **Testing**: Pytest (Unit Testing)
+- **Environment**: Virtual Env / `pip`
+
 ## Project Structure
 - `src/`: Core Python modules (model, training, prediction)
 - `data/`: Raw and processed datasets
