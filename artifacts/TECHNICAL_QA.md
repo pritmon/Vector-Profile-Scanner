@@ -100,3 +100,23 @@ This document serves as an internal reference for the technical decisions, archi
 *   **The Decision:** We have to decide whether to delete or guess.
 *   **Dropping:** If only 1% of the rows are missing data, we can safely throw those rows into the trash entirely.
 *   **Imputation (Guessing):** If 30% of the rows are missing the "salary" column, we can't throw away that much data. Instead, we fill in the blank spaces with the *average* salary of everyone else, or use a smaller ML model to predict what the missing value *should* be.
+
+## 8. Advanced NLP Concepts (Tokens & LLMs)
+
+**Q: What exactly is a "Token", and how does the model see it?**
+**A:**
+*   **The Concept:** A token is the smallest piece of a puzzle. Instead of a model reading the entire sentence "Artificial Intelligence Engineer" as one giant continuous block, it chops it up into three smaller pieces (tokens): "Artificial", "Intelligence", and "Engineer".
+*   **The Process:** `TextVectorization` splits a phrase into these tokens, counts them up, and assigns a specific number to each unique piece.
+*   **The Analogy:** It’s exactly like taking a fully built LEGO spaceship (the phrase) and snapping it back down into individual blue, red, and yellow bricks (tokens) so the robot can count exactly how many of each color there are.
+
+**Q: When processing text or documents, why do we use "Chunks"?**
+**A:**
+*   **The Problem:** The robot brain only has a small amount of short-term memory (RAM). If we give it a 10,000-word resume all at once, it will choke and crash.
+*   **The Solution:** "Chunking" means slicing the massive document into smaller, bite-sized paragraphs of 100 or 200 words.
+*   **The Analogy:** You can't swallow a whole pizza in one single bite without choking. You must slice the pizza into 8 chunks, eat one piece at a time, process it, and move on to the next.
+
+**Q: Does our Vector Profile Scanner suffer from "AI Hallucination" like ChatGPT?**
+**A:**
+*   **Different Brain Types:** ChatGPT is a *Generative* model (a storyteller)—it generates totally new sentences, and sometimes it gets confused and just confidently makes up a lie (a hallucination) because it wants to finish the story.
+*   **Our Model:** Our `Sequential` model is an *Analytical/Discriminative* model (a security guard). It doesn't create sentences; it simply looks at an ID (the tokens) and outputs a percentage (e.g., "I am 90% sure this is a Google Skill").
+*   **The False Positive:** Because it only outputs a math percentage from 0% to 100%, it cannot "hallucinate" a fake skill. The worst mistake it can make is a "False Positive"—acting like an overly eager security guard who mistakenly lets a regular employee into a VIP room.
