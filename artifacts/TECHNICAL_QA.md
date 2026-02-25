@@ -143,3 +143,9 @@ This document serves as an internal reference for the technical decisions, archi
     *   A grid of numbers (An image with pixels) is a *Matrix*.
     *   Once you stack grids on top of grids (like video frames), we just simplify and call everything a *Tensor*.
 *   **The Flow:** The framework is named "TensorFlow" because data (represented as these number grids) literally "flows" continuously through the layers of the neural network during training.
+
+**Q: Exactly how are Tensors being used inside this Vector Profile Scanner code?**
+**A:**
+*   **Converting Labels:** In `data_loader.py`, we load the raw target labels (1s and 0s) from the CSV into a standard Python list. Neural networks can't run math on standard lists, so we use `tf.constant(labels)` to convert that list directly into a 1-Dimensional Tensor.
+*   **Converting Words:** In `train.py`, the `TextVectorization` layer takes raw text strings and builds a massive 2-Dimensional Tensor grid composed of 1s and 0s (representing which vocabulary tokens exist).
+*   **The "Flow":** During `model.fit(X, labels)`, these two massive Tensors (the 2D text grid and the 1D answers) are literally flowing into the Dense layer to run millions of quick matrix multiplications during training.
