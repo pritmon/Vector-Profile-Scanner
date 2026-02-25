@@ -10,3 +10,9 @@ venv/
 
 # Ignore trained models
 models/
+
+# Ignore Testing & Notebooks
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
