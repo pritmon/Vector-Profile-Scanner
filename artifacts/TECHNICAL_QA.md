@@ -69,3 +69,34 @@ This document serves as an internal reference for the technical decisions, archi
 *   **The Connection:** We would connect our system to a live Database (like PostgreSQL) instead of a static CSV file.
 *   **The Worker:** Every night, an automated "cron job" (an invisible worker) would fetch the new skills.
 *   **The Update:** It retrains a brand new model entirely in the background, and then instantly copies the new model into the live folder with zero downtime for users.
+
+## 6. Model Performance & Evaluation
+
+**Q: In a binary classification project like this, what is the best way to evaluate if the model is actually "good"? Is Accuracy enough?**
+**A:**
+*   **The Problem with Accuracy:** Imagine a hospital testing for a very rare disease where 99 people are healthy and 1 is sick. A model could just blindly guess "healthy" every single time and score 99% accuracy, even though it failed its actual job of finding the sick person.
+*   **The Solution (Precision & Recall):** We must look at two other numbers. 
+    *   **Precision:** Out of all the people the model *claimed* were sick, how many actually were? (Are there too many false alarms?)
+    *   **Recall:** Out of all the people who were *actually* sick, how many did the model successfully find? (Did it miss anyone in danger?)
+*   **The Trade-off (F1-Score):** Usually, increasing one lowers the other. The F1-Score combines them into a single reliable grade.
+
+**Q: What is "Overfitting", and how do you prevent it in neural networks?**
+**A:**
+*   **The Concept:** Overfitting is like a student who memorizes the exact answers to a practice test but fails the real exam because they never actually learned the *concepts*.
+*   **The Symptoms:** The model gets a near-perfect score on the training data but performs terribly when shown new, unseen data.
+*   **The Prevention:** We can use **Dropout** (randomly turning off a few brain cells during training so it doesn't rely too heavily on one specific path) or **Early Stopping** (stopping the training the moment it starts memorizing instead of learning).
+
+## 7. Data Handling
+
+**Q: How would you handle "Imbalanced Data" if your CSV file had 10,000 non-skills but only 50 Google skills?**
+**A:**
+*   **The Danger:** If one bucket is overflowing and the other is nearly empty, the model will just lazily guess the full bucket every time to get an easy high score.
+*   **Fix 1 (Oversampling):** We can artificially copy the 50 Google skills over and over until there are 10,000 of them, balancing the scales.
+*   **Fix 2 (Undersampling):** We can randomly throw away 9,950 non-skills to match the 50 Google skills, though we lose a lot of information this way.
+*   **Fix 3 (Class Weights):** We can tell the model's grading system that guessing a Google skill correctly is worth 200 points, while guessing a non-skill is only worth 1 point.
+
+**Q: How do you handle "Missing Data" (Null values) in your datasets?**
+**A:**
+*   **The Decision:** We have to decide whether to delete or guess.
+*   **Dropping:** If only 1% of the rows are missing data, we can safely throw those rows into the trash entirely.
+*   **Imputation (Guessing):** If 30% of the rows are missing the "salary" column, we can't throw away that much data. Instead, we fill in the blank spaces with the *average* salary of everyone else, or use a smaller ML model to predict what the missing value *should* be.
