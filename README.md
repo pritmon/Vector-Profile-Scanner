@@ -23,11 +23,13 @@ This project is an end-to-end **Machine Learning Classification Pipeline** built
 
 <pre>
 Vector-Profile-Scanner/
+├── <a href="./.github">.github/</a>                # GitHub Actions CI/CD workflows
 ├── <a href="./src">src/</a>                    # Core Python modules (model, training, prediction)
 │   ├── <a href="./src/data_loader.py">data_loader.py</a>      # Script to load and preprocess data
 │   ├── <a href="./src/model.py">model.py</a>            # Neural network architecture definition
 │   ├── <a href="./src/train.py">train.py</a>            # Script for training the model
-│   └── <a href="./src/predict.py">predict.py</a>          # Script to run predictions on new data
+│   ├── <a href="./src/predict.py">predict.py</a>          # Script to run predictions on new data
+│   └── <a href="./src/api.py">api.py</a>              # FastAPI web server endpoint
 ├── <a href="./data">data/</a>                   # Raw and processed datasets needed for training
 │   └── <a href="./data/raw">raw/</a>                
 │       └── <a href="./data/raw/skills.csv">skills.csv</a>      # The core dataset containing raw profile skills
@@ -40,6 +42,8 @@ Vector-Profile-Scanner/
 ├── <a href="./models">models/</a>                 # Generated artifacts and TensorFlow `.keras` weights
 ├── <a href="./requirements.txt">requirements.txt</a>        # Python dependencies
 ├── <a href="./setup.py">setup.py</a>                # Package installation configuration
+├── <a href="./Dockerfile">Dockerfile</a>              # Containerization configuration
+├── <a href="./.dockerignore">.dockerignore</a>           # Docker build exclusions
 └── <a href="./README.md">README.md</a>               # Project documentation
 </pre>
 
