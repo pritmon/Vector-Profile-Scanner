@@ -86,3 +86,18 @@ git commit -m "docs: add comprehensive docstrings and architecture qa"
 # Push the local commits to the main branch on the remote GitHub repository
 git push
 ```
+
+## 6. Docker & Web Deployment
+
+Commands to run the FastAPI REST server and package the app securely.
+
+```bash
+# Start the live FastAPI server locally
+uvicorn src.api:app --reload
+
+# Build the Docker container image
+docker build -t vector-profile-scanner .
+
+# Run the containerized server to expose it on port 8000
+docker run -p 8000:8000 vector-profile-scanner
+```

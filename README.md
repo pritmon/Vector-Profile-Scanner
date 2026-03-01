@@ -72,3 +72,15 @@ pytest tests/
 ```bash
 jupyter notebook notebooks/01_data_exploration.ipynb
 ```
+
+### 5. Run Web API Server (FastAPI)
+```bash
+uvicorn src.api:app --reload
+```
+Navigate to `http://localhost:8000/docs` in your browser to use the interactive Swagger UI.
+
+### 6. Run via Docker
+```bash
+docker build -t vector-profile-scanner .
+docker run -p 8000:8000 vector-profile-scanner
+```

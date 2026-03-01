@@ -24,15 +24,30 @@ def train():
     print("Loading data...")
     data, labels = load_data()
     
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import classification_report
+    
+    data_train, data_test, y_train, y_test = train_test_split(
+        data, labels.numpy(), test_size=0.2, random_state=42
+    )
+    
     print("Creating vectorizer...")
-    vectorizer = create_vectorizer(data)
-    X = vectorizer(data)
+    vectorizer = create_vectorizer(data_train)
+    X_train = vectorizer(data_train)
+    X_test = vectorizer(data_test)
     
     print("Building model...")
-    model = build_model(input_shape=X.shape[1])
+    model = build_model(input_shape=X_train.shape[1])
     
     print("Training model...")
-    model.fit(X, labels, epochs=500, verbose=0)
+    model.fit(X_train, y_train, epochs=500, verbose=0)
+    
+    print("\n--- Evaluating Model on Test Data ---")
+    predictions = model.predict(X_test, verbose=0)
+    y_pred = (predictions > 0.5).astype(int)
+    
+    print(classification_report(y_test, y_pred, target_names=["Non-relevant", "AI Skill"]))
+
     
     print("Saving model and vectorizer...")
     os.makedirs('models', exist_ok=True)
