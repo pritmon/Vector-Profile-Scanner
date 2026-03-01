@@ -22,7 +22,10 @@ Vector-Profile-Scanner/
 │   ├── <a href="./src/train.py">train.py</a>            # Script for training the model
 │   └── <a href="./src/predict.py">predict.py</a>          # Script to run predictions on new data
 ├── <a href="./data">data/</a>                   # Raw and processed datasets needed for training
+│   └── <a href="./data/raw">raw/</a>                
+│       └── <a href="./data/raw/skills.csv">skills.csv</a>      # The core dataset containing raw profile skills
 ├── <a href="./notebooks">notebooks/</a>              # Exploratory Data Analysis (EDA) Jupyter notebooks
+│   └── <a href="./notebooks/01_data_exploration.ipynb">01_data_exploration.ipynb</a> # Visualizing the dataset imbalance and trends
 ├── <a href="./tests">tests/</a>                  # Automated pytest verification suite
 │   ├── <a href="./tests/__init__.py">__init__.py</a>         # Test package initialization
 │   ├── <a href="./tests/test_data_loader.py">test_data_loader.py</a> # Tests for data loading and preprocessing
