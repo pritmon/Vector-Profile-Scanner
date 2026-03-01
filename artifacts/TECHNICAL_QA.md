@@ -225,3 +225,16 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **The Agile Evaluation:** First, we evaluate the architectural impact. Adding an entirely new JSON data structure is a massive pivot, not a minor tweak to the neural network.
 > *   **Leveraging Modular Architecture:** Because our Scanner was built smartly, separating the `data_loader.py` logic from the `model.py` logic, the core engine survives. We would only need to write a new data-fetching script to plug into the completely unmodified `model.py` training pipeline.
 > *   **The Negotiation:** We confidently communicate the trade-offs back to the client: "Our architecture makes this incredibly easy, however, developing the new data connections will stretch the delivery timeline by exactly two weeks. Shall we add this as Phase 2, or officially pivot Phase 1's budget right now?" Giving them complete visibility prevents scope creep.
+
+---
+
+## 11. Command Line Execution & Debugging
+
+### 🟣 Q: When executing a Python Machine Learning script in the terminal, how do you differentiate between a fatal Error and a `FutureWarning` or `DeprecationWarning`?
+
+> [!NOTE]
+> **Answer:**
+> *   **The Scenario:** Often, running complex ML scripts like `python3 src/predict.py "Vertex AI"` outputs massive blocks of red or yellow text before the actual prediction result. Business stakeholders often panic, assuming the system is broken.
+> *   **The Explanation (`FutureWarning`):** A Warning is not an Error. It is simply a polite notification from a library's creator (like Google or TensorFlow) stating that the specific version of Python or the tool you are currently using will eventually stop receiving updates in the future (e.g., Python 3.9).
+> *   **The Impact:** The underlying mathematical logic and execution of the script remains 100% flawless. The model successfully loaded the `.keras` file and successfully output its `86%` confidence score.
+> *   **The Fix:** If the visual clutter becomes a problem in a production environment, an engineer can explicitly suppress these warnings in the code using Python's native `warnings.filterwarnings('ignore')` library, ensuring users only see the clean "Prediction Result".
