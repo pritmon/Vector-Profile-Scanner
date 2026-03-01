@@ -21,7 +21,11 @@ def load_inference_artifacts():
     with open('models/vectorizer_vocab.pkl', 'rb') as f:
         vocab = pickle.load(f)
         
-    vectorizer = tf.keras.layers.TextVectorization(output_mode='multi_hot')
+    vectorizer = tf.keras.layers.TextVectorization(
+        output_mode='count',
+        standardize='lower_and_strip_punctuation',
+        split='whitespace'
+    )
     vectorizer.set_vocabulary(vocab)
     
     return model, vectorizer
@@ -35,9 +39,18 @@ def predict(skill):
     """
     model, vectorizer = load_inference_artifacts()
     
-    # Run prediction
+    # Run vectorization
     X = vectorizer([skill])
-    prediction = model.predict(X, verbose=0)[0][0]
+    
+    # Check for completely unknown vocabulary
+    # If the sum of the count array is 0, the model knows literally none 
+    # of the words in the input. Force a 0% confidence to prevent 
+    # the Dense layer from predicting its mathematical baseline bias.
+    if tf.reduce_sum(X).numpy() == 0:
+        prediction = 0.0
+    else:
+        # Run standard prediction
+        prediction = model.predict(X, verbose=0)[0][0]
     
     # Output result
     category = "Google AI Engineer Skill" if prediction > 0.5 else "Non-relevant"
