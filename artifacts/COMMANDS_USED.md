@@ -20,11 +20,13 @@ The core commands to train the model and make immediate predictions:
 
 ```bash
 # Train the model from the CSV dataset and save the .keras artifacts
+# NOTE: You MUST run this command every single time you edit the `skills.csv`!
 python3 src/train.py
 
 # Make a live prediction against the saved model.
-# Note: You can replace "Vertex AI" with any custom string like "Cooking" to test it
 python3 src/predict.py "Vertex AI"
+python3 src/predict.py "Haircut"
+python3 src/predict.py "Python and Excel"
 ```
 
 ## 3. Automated Testing
@@ -46,6 +48,21 @@ Commands to load the interactive Jupyter environment for Data Analysis:
 ```bash
 # Launch the Jupyter Notebook server in your browser to view EDA files
 jupyter notebook notebooks/01_data_exploration.ipynb
+
+# Programmatically execute and embed output graphs directly into the notebook for GitHub viewing
+python3 -c '
+import nbformat
+from nbclient import NotebookClient
+
+with open("notebooks/01_data_exploration.ipynb", "r") as f:
+    nb = nbformat.read(f, as_version=4)
+    
+client = NotebookClient(nb, timeout=600, kernel_name="python3")
+client.execute()
+
+with open("notebooks/01_data_exploration.ipynb", "w", encoding="utf-8") as f:
+    nbformat.write(nb, f)
+'
 ```
 
 ## 5. Git & Version Control
