@@ -70,6 +70,18 @@ This document serves as an internal reference for the technical decisions, archi
 *   **The Worker:** Every night, an automated "cron job" (an invisible worker) would fetch the new skills.
 *   **The Update:** It retrains a brand new model entirely in the background, and then instantly copies the new model into the live folder with zero downtime for users.
 
+**Q: How did you design the architecture to ensure this system is "Future-Proof" and loosely coupled?**
+**A:**
+*   **The Philosophy:** World-class system design relies heavily on the "Separation of Concerns." 
+*   **The Implementation:** Notice how our prediction logic (`predict.py`) doesn't care *how* the model was trained. The training logic (`train.py`) doesn't care *where* the data came from. They only communicate through the saved artifacts (`.keras` and `.pkl` files).
+*   **The Benefit:** Tomorrow, if the client requests to completely rip out TensorFlow and replace it with a massive PyTorch LLM, we only have to rewrite the `build_model()` function. The rest of the pipeline remains entirely unbroken and functional.
+
+**Q: If this was deployed in a highly demanding production environment, how would you handle "Model Drift" over time?**
+**A:**
+*   **The Reality:** A model trained perfectly in 2024 will slowly become useless by 2026 as the technology landscape completely shifts (e.g., "Prompt Engineering" wasn't a prominent skill a few years ago). This degradation is called Model Drift.
+*   **The Monitoring:** We must implement a "Shadow Mode" deployment or keep a human-in-the-loop to constantly sample the model's predictions. If its mathematical confidence drops, an alert is fired.
+*   **The CI/CD Loop:** A demanding ML pipeline requires automated triggers. When drift is detected, the system pulls the latest fresh data from the recruiters, automatically kicks off `train.py`, validates the new F1-score against the old one in an isolated test environment, and automatically deploys the heavily updated model.
+
 ## 6. Model Performance & Evaluation
 
 **Q: In a binary classification project like this, what is the best way to evaluate if the model is actually "good"? Is Accuracy enough?**
@@ -149,3 +161,19 @@ This document serves as an internal reference for the technical decisions, archi
 *   **Converting Labels:** In `data_loader.py`, we load the raw target labels (1s and 0s) from the CSV into a standard Python list. Neural networks can't run math on standard lists, so we use `tf.constant(labels)` to convert that list directly into a 1-Dimensional Tensor.
 *   **Converting Words:** In `train.py`, the `TextVectorization` layer takes raw text strings and builds a massive 2-Dimensional Tensor grid composed of 1s and 0s (representing which vocabulary tokens exist).
 *   **The "Flow":** During `model.fit(X, labels)`, these two massive Tensors (the 2D text grid and the 1D answers) are literally flowing into the Dense layer to run millions of quick matrix multiplications during training.
+
+---
+
+## 10. Product Lifecycle & Requirement Gathering
+
+**Q: In a real-world environment, how did you practically gather, solidify, and finalize the requirements from the business client for this tool?**
+**A:**
+*   **The Discovery Phase:** Professionals don't start by asking a business stakeholder, "What ML framework do you want?" Stakeholders rarely know. The process starts by identifying the exact business pain: "We are wasting 40 human hours a week manually reviewing completely irrelevant resumes."
+*   **Defining the "Golden Standard":** To finalize requirements, we sit with the Subject Matter Experts (senior recruiters in this case) to understand *exactly* how a human makes the decision. We translated their human intuition of what counts as an "AI Skill" into concrete, measurable `.csv` data rows.
+*   **The MVP Agreement (Minimum Viable Product):** Demanding clients want perfection instantly. The key to finalizing requirements is agreeing that a 100% perfect AI is a multi-year project. We agreed on an MVP specification: the system only needs to confidently identify and filter out the bottom 80% of irrelevant profiles immediately, allowing the recruiters to spend their valuable time purely on the ambiguous top 20%.
+
+**Q: How do you handle changing business demands mid-project (e.g., the client suddenly asks if the model can also read GitHub JSON repos instead of just text)?**
+**A:**
+*   **The Agile Evaluation:** First, we evaluate the architectural impact. Adding an entirely new JSON data structure is a massive pivot, not a minor tweak to the neural network.
+*   **Leveraging Modular Architecture:** Because our Scanner was built smartly, separating the `data_loader.py` logic from the `model.py` logic, the core engine survives. We would only need to write a new data-fetching script to plug into the completely unmodified `model.py` training pipeline.
+*   **The Negotiation:** We confidently communicate the trade-offs back to the client: "Our architecture makes this incredibly easy, however, developing the new data connections will stretch the delivery timeline by exactly two weeks. Shall we add this as Phase 2, or officially pivot Phase 1's budget right now?" Giving them complete visibility prevents scope creep.
