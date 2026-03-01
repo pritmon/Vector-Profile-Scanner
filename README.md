@@ -11,11 +11,20 @@ This is a beginner-friendly project using TensorFlow to classify Google AI Engin
 - **Environment**: Virtual Env / `pip`
 
 ## Project Structure
-- [`src/`](./src): Core Python modules (model, training, prediction)
-- [`data/`](./data): Raw and processed datasets
-- [`notebooks/`](./notebooks): Exploratory Data Analysis (EDA) Jupyter notebooks
-- [`tests/`](./tests): Automated pytest verification suite
-- [`models/`](./models): Generated artifacts and TensorFlow `.keras` weights
+
+📂 [**`Vector-Profile-Scanner/`**](./)<br>
+├── 📂 [**`src/`**](./src) — Core Python modules (model, training, prediction)<br>
+│&nbsp;&nbsp;&nbsp;├── 📄 [**`data_loader.py`**](./src/data_loader.py) — Script to load and preprocess data<br>
+│&nbsp;&nbsp;&nbsp;├── 📄 [**`model.py`**](./src/model.py) — Neural network architecture definition<br>
+│&nbsp;&nbsp;&nbsp;├── 📄 [**`train.py`**](./src/train.py) — Script for training the model<br>
+│&nbsp;&nbsp;&nbsp;└── 📄 [**`predict.py`**](./src/predict.py) — Script to run predictions on new data<br>
+├── 📂 [**`data/`**](./data) — Raw and processed datasets needed for training<br>
+├── 📂 [**`notebooks/`**](./notebooks) — Exploratory Data Analysis (EDA) Jupyter notebooks<br>
+├── 📂 [**`tests/`**](./tests) — Automated pytest verification suite<br>
+├── 📂 [**`models/`**](./models) — Generated artifacts and TensorFlow `.keras` weights<br>
+├── 📄 [**`requirements.txt`**](./requirements.txt) — Python dependencies<br>
+├── 📄 [**`setup.py`**](./setup.py) — Package installation configuration<br>
+└── 📄 [**`README.md`**](./README.md) — Project documentation<br>
 
 ## Installation
 Setup the project locally using Python's package manager:
