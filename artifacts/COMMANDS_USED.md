@@ -93,7 +93,7 @@ Commands to run the FastAPI REST server and package the app securely.
 
 ```bash
 # Start the live FastAPI server locally
-uvicorn src.api:app --reload
+python3 -m uvicorn src.api:app --reload
 
 # Build the Docker container image
 docker build -t vector-profile-scanner .
