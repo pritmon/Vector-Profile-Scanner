@@ -1,6 +1,8 @@
 # Vector Profile Scanner
 
-This is a beginner-friendly project using TensorFlow to classify Google AI Engineer skills vs. non-relevant skills. It is built using the industry-standard structure for Machine Learning projects.
+A TensorFlow-powered skill classification system that identifies Google AI Engineer–relevant skills using a structured, production-style Machine Learning pipeline.
+
+Built following industry-standard ML project architecture, including modular components for data processing, training, evaluation, and prediction.
 
 ## Tech Stack
 - **Language**: Python 3.9+
