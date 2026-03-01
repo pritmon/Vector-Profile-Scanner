@@ -11,19 +11,11 @@ This is a beginner-friendly project using TensorFlow to classify Google AI Engin
 - **Environment**: Virtual Env / `pip`
 
 ## Project Structure
-
-*   [**`src/`**](./src) - Core Python modules (model, training, prediction)
-    *   [**`data_loader.py`**](./src/data_loader.py) - Script to load and preprocess data
-    *   [**`model.py`**](./src/model.py) - Neural network architecture definition
-    *   [**`train.py`**](./src/train.py) - Script for training the model
-    *   [**`predict.py`**](./src/predict.py) - Script to run predictions on new data
-*   [**`data/`**](./data) - Raw and processed datasets needed for training
-*   [**`notebooks/`**](./notebooks) - Exploratory Data Analysis (EDA) Jupyter notebooks
-*   [**`tests/`**](./tests) - Automated pytest verification suite
-*   [**`models/`**](./models) - Generated artifacts and TensorFlow `.keras` weights
-*   [**`requirements.txt`**](./requirements.txt) - Python dependencies
-*   [**`setup.py`**](./setup.py) - Package installation configuration
-*   [**`README.md`**](./README.md) - Project documentation
+- [`src/`](./src): Core Python modules (model, training, prediction)
+- [`data/`](./data): Raw and processed datasets
+- [`notebooks/`](./notebooks): Exploratory Data Analysis (EDA) Jupyter notebooks
+- [`tests/`](./tests): Automated pytest verification suite
+- [`models/`](./models): Generated artifacts and TensorFlow `.keras` weights
 
 ## Installation
 Setup the project locally using Python's package manager:
