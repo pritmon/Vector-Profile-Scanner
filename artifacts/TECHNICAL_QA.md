@@ -228,13 +228,22 @@ This document serves as an internal reference for the technical decisions, archi
 
 ---
 
-## 11. Command Line Execution & Debugging
+## 11. Model Confidence & Probability Thresholds
 
-### 🟣 Q: When executing a Python Machine Learning script in the terminal, how do you differentiate between a fatal Error and a `FutureWarning` or `DeprecationWarning`?
+### 🟣 Q: The model outputs a single number like `0.86`. How does the Dense layer actually compute a "Confidence Score" between 0 and 1?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Scenario:** Often, running complex ML scripts like `python3 src/predict.py "Vertex AI"` outputs massive blocks of red or yellow text before the actual prediction result. Business stakeholders often panic, assuming the system is broken.
-> *   **The Explanation (`FutureWarning`):** A Warning is not an Error. It is simply a polite notification from a library's creator (like Google or TensorFlow) stating that the specific version of Python or the tool you are currently using will eventually stop receiving updates in the future (e.g., Python 3.9).
-> *   **The Impact:** The underlying mathematical logic and execution of the script remains 100% flawless. The model successfully loaded the `.keras` file and successfully output its `86%` confidence score.
-> *   **The Fix:** If the visual clutter becomes a problem in a production environment, an engineer can explicitly suppress these warnings in the code using Python's native `warnings.filterwarnings('ignore')` library, ensuring users only see the clean "Prediction Result".
+> *   **The Activation Function:** The final layer of our network uses a `sigmoid` activation function. 
+> *   **The Math:** Without Sigmoid, the mathematical matrix multiplication might output a raw, unbounded number like `14.5` or `-402.1` (logits). 
+> *   **The Squeeze:** Sigmoid acts as a mathematical "squasher". It takes any output number from negative infinity to positive infinity and elegantly squeezes it into a strict probability curve between `0.0` and `1.0`.
+> *   **The Result:** This squashed number (e.g., `0.86`) is treated as the model's "Confidence Score," representing an 86% probability that the profile belongs to the positive class (Google AI Engineer).
+
+### 🟣 Q: Your `predict.py` script uses a default threshold of `0.5` to make a final decision. In a real business scenario, why might you manually change this threshold to `0.8` or `0.2`?
+
+> [!NOTE]
+> **Answer:**
+> *   **The Trade-off:** Changing the threshold is how we balance between **Precision** (avoiding false alarms) and **Recall** (catching every single possibility).
+> *   **Raising to `0.8` (High Precision):** If it costs $1000 every time a recruiter interviews a candidate, we want to be *extremely* sure they are relevant. Raising the threshold to `0.8` means the model only flags a profile if it is wildly confident. We might miss some good candidates, but we waste zero money on bad ones.
+> *   **Lowering to `0.2` (High Recall):** If the company is desperate for AI talent and cannot risk missing *anyone* with even a hint of AI experience, we lower the threshold to `0.2`. The recruiters will have to manually reject a lot of false positives, but they are guaranteed to not miss a single hidden gem.
+> *   **The Interview Point:** Threshold tuning proves you don't just blindly accept default ML code, but rather you tune the math to solve the exact constraint (Time vs. False Positives) of the business stakeholder.
