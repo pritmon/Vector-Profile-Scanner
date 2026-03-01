@@ -22,6 +22,9 @@ Vector-Profile-Scanner/
 ├── <a href="./data">data/</a>                   # Raw and processed datasets needed for training
 ├── <a href="./notebooks">notebooks/</a>              # Exploratory Data Analysis (EDA) Jupyter notebooks
 ├── <a href="./tests">tests/</a>                  # Automated pytest verification suite
+│   ├── <a href="./tests/__init__.py">__init__.py</a>         # Test package initialization
+│   ├── <a href="./tests/test_data_loader.py">test_data_loader.py</a> # Tests for data loading and preprocessing
+│   └── <a href="./tests/test_model.py">test_model.py</a>       # Tests for neural network architecture
 ├── <a href="./models">models/</a>                 # Generated artifacts and TensorFlow `.keras` weights
 ├── <a href="./requirements.txt">requirements.txt</a>        # Python dependencies
 ├── <a href="./setup.py">setup.py</a>                # Package installation configuration
