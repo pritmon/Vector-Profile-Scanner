@@ -11,11 +11,27 @@ This is a beginner-friendly project using TensorFlow to classify Google AI Engin
 - **Environment**: Virtual Env / `pip`
 
 ## Project Structure
-- `src/`: Core Python modules (model, training, prediction)
-- `data/`: Raw and processed datasets
-- `notebooks/`: Exploratory Data Analysis (EDA) Jupyter notebooks
-- `tests/`: Automated pytest verification suite
-- `models/`: Generated artifacts and TensorFlow `.keras` weights
+```text
+Vector-Profile-Scanner/
+│
+├── src/                    # Core Python modules (model, training, prediction)
+│   ├── data_loader.py      # Script to load and preprocess data
+│   ├── model.py            # Neural network architecture definition
+│   ├── train.py            # Script for training the model
+│   └── predict.py          # Script to run predictions on new data
+│
+├── data/                   # Raw and processed datasets needed for training
+│
+├── notebooks/              # Exploratory Data Analysis (EDA) Jupyter notebooks
+│
+├── tests/                  # Automated pytest verification suite
+│
+├── models/                 # Generated artifacts and TensorFlow `.keras` weights
+│
+├── requirements.txt        # Python dependencies
+├── setup.py                # Package installation configuration
+└── README.md               # Project documentation
+```
 
 ## Installation
 Setup the project locally using Python's package manager:
