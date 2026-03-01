@@ -12,6 +12,13 @@ Built following industry-standard ML project architecture, including modular com
 - **Testing**: Pytest (Unit Testing)
 - **Environment**: Virtual Env / `pip`
 
+## Project Scope
+This project is an end-to-end **Machine Learning Classification Pipeline** built from scratch. It demonstrates the complete lifecycle of a professional AI project:
+1. **Data Ingestion (Custom Vocabulary):** Uses TensorFlow's `TextVectorization` to read strictly from a custom dataset (`skills.csv`) and break text down into mathematical arrays, ignoring out-of-vocabulary words.
+2. **Model Training (Sequential Neural Network):** Builds a specialized Deep Learning model to mathematically learn the exact weights of what makes a candidate's skill "Google AI Engineer relevant" vs "Non-relevant".
+3. **Live Inference (Command-Line Predictions):** Provides a lightweight script (`predict.py`) to instantly calculate live Confidence Scores for any new custom string against the trained `.keras` brain.
+4. **Industry Standards (Stability & Visualization):** Includes Data Science visualizations via Jupyter Notebooks for EDA (Exploratory Data Analysis) and an automated Pytest suite to proactively verify the logic integrity of the neural network.
+
 ## Project Structure
 
 <pre>
