@@ -1,9 +1,21 @@
+"""
+Prediction module for the Vector Profile Scanner.
+
+Loads the trained model and vocabulary artifacts from the `models/` directory,
+and provides a command-line interface to classify if a given skill is relevant 
+to a Google AI Engineer role.
+"""
 import tensorflow as tf
 import pickle
 import argparse
 
 def load_inference_artifacts():
-    """Loads the trained model and recreates the TextVectorization layer."""
+    """
+    Loads the trained model and recreates the TextVectorization layer.
+    
+    Returns:
+        tuple: (Compiled Keras model, Initialized TextVectorization layer)
+    """
     model = tf.keras.models.load_model('models/skill_classifier.keras')
     
     with open('models/vectorizer_vocab.pkl', 'rb') as f:
@@ -15,6 +27,12 @@ def load_inference_artifacts():
     return model, vectorizer
 
 def predict(skill):
+    """
+    Predicts the relevance of a single skill string.
+    
+    Args:
+        skill (str): The skill text to classify (e.g. "TensorFlow")
+    """
     model, vectorizer = load_inference_artifacts()
     
     # Run prediction
