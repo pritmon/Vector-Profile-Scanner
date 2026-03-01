@@ -12,19 +12,21 @@ This is a beginner-friendly project using TensorFlow to classify Google AI Engin
 
 ## Project Structure
 
-📂 [**`Vector-Profile-Scanner/`**](./)<br>
-├── 📂 [**`src/`**](./src) — Core Python modules (model, training, prediction)<br>
-│&nbsp;&nbsp;&nbsp;├── 📄 [**`data_loader.py`**](./src/data_loader.py) — Script to load and preprocess data<br>
-│&nbsp;&nbsp;&nbsp;├── 📄 [**`model.py`**](./src/model.py) — Neural network architecture definition<br>
-│&nbsp;&nbsp;&nbsp;├── 📄 [**`train.py`**](./src/train.py) — Script for training the model<br>
-│&nbsp;&nbsp;&nbsp;└── 📄 [**`predict.py`**](./src/predict.py) — Script to run predictions on new data<br>
-├── 📂 [**`data/`**](./data) — Raw and processed datasets needed for training<br>
-├── 📂 [**`notebooks/`**](./notebooks) — Exploratory Data Analysis (EDA) Jupyter notebooks<br>
-├── 📂 [**`tests/`**](./tests) — Automated pytest verification suite<br>
-├── 📂 [**`models/`**](./models) — Generated artifacts and TensorFlow `.keras` weights<br>
-├── 📄 [**`requirements.txt`**](./requirements.txt) — Python dependencies<br>
-├── 📄 [**`setup.py`**](./setup.py) — Package installation configuration<br>
-└── 📄 [**`README.md`**](./README.md) — Project documentation<br>
+<pre>
+Vector-Profile-Scanner/
+├── <a href="./src">src/</a>                    # Core Python modules (model, training, prediction)
+│   ├── <a href="./src/data_loader.py">data_loader.py</a>      # Script to load and preprocess data
+│   ├── <a href="./src/model.py">model.py</a>            # Neural network architecture definition
+│   ├── <a href="./src/train.py">train.py</a>            # Script for training the model
+│   └── <a href="./src/predict.py">predict.py</a>          # Script to run predictions on new data
+├── <a href="./data">data/</a>                   # Raw and processed datasets needed for training
+├── <a href="./notebooks">notebooks/</a>              # Exploratory Data Analysis (EDA) Jupyter notebooks
+├── <a href="./tests">tests/</a>                  # Automated pytest verification suite
+├── <a href="./models">models/</a>                 # Generated artifacts and TensorFlow `.keras` weights
+├── <a href="./requirements.txt">requirements.txt</a>        # Python dependencies
+├── <a href="./setup.py">setup.py</a>                # Package installation configuration
+└── <a href="./README.md">README.md</a>               # Project documentation
+</pre>
 
 ## Installation
 Setup the project locally using Python's package manager:
