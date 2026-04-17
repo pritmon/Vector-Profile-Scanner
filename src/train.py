@@ -40,11 +40,26 @@ def train():
     print("Building model...")
     model = build_model(input_shape=X_train.shape[1])
     
-    print("Training model...")
-    # Reduced epochs to 100 to prevent overfitting on the small dataset
-    model.fit(X_train, y_train, epochs=100, verbose=0)
+    print("Training model with EarlyStopping...")
+    # Stop training if the validation loss doesn't improve for 5 consecutive epochs
+    early_stopping = tf.keras.callbacks.EarlyStopping(
+        monitor='val_loss',
+        patience=5,
+        restore_best_weights=True,
+        verbose=1
+    )
+    
+    history = model.fit(
+        X_train, y_train, 
+        epochs=100, 
+        batch_size=32,
+        validation_split=0.1, # Monitor validation data for overfitting
+        callbacks=[early_stopping],
+        verbose=1 # Show progress in logs
+    )
     
     print("\n--- Evaluating Model on Test Data ---")
+
     predictions = model.predict(X_test, verbose=0)
     y_pred = (predictions > 0.5).astype(int)
     

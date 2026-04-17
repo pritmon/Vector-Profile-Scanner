@@ -5,34 +5,59 @@ from contextlib import asynccontextmanager
 from src.utils import load_inference_artifacts
 from src.config import MODEL_PATH, VOCAB_PATH
 
+from fastapi.middleware.cors import CORSMiddleware
+import time
+
 # Global artifacts
 artifacts = {}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Load artifacts on startup
+    print("🚀 Starting API server and loading ML artifacts...")
+    start_time = time.time()
     try:
         model, vectorizer = load_inference_artifacts(MODEL_PATH, VOCAB_PATH)
         artifacts["model"] = model
         artifacts["vectorizer"] = vectorizer
+        duration = time.time() - start_time
+        print(f"✅ ML artifacts loaded successfully in {duration:.2f}s")
     except FileNotFoundError as e:
-        print(f"Warning: {e}")
+        print(f"❌ Failed to load artifacts: {e}")
+        print("💡 Hint: Run 'python -m src.train' first.")
     yield
     # Clean up on shutdown
+    print("🛑 Shutting down API server...")
     artifacts.clear()
 
 app = FastAPI(
     title="Vector Profile Scanner API",
-    description="A Machine Learning API to classify if a candidate's skills are relevant for a Google AI Engineer.",
+    description="Enterprise-grade AI Skill Classification Engine.",
+    version="1.0.0",
     lifespan=lifespan
+)
+
+# Enable CORS for frontend integrations
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In production, replace with specific domains
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 from fastapi.responses import RedirectResponse
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root_placeholder():
-    # If someone visits the bare URL, instantly bounce them to the Swagger Documentation
     return RedirectResponse(url="/docs")
+
+@app.get("/health")
+def health_check():
+    """Service health monitoring endpoint."""
+    status = "ready" if artifacts.get("model") else "warning: model not loaded"
+    return {"status": status, "timestamp": time.time()}
+
 
 class SkillRequest(BaseModel):
     skill: str

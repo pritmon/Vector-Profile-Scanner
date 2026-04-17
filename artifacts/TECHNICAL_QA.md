@@ -22,13 +22,13 @@ This document serves as an internal reference for the technical decisions, archi
 
 ## 2. Model Architecture
 
-### 🟣 Q: Why use a simple Neural Network with just one `<kbd>Dense</kbd>` layer instead of a massive AI structure?
+### 🟣 Q: Why use a Neural Network with a `<kbd>Hidden Layer</kbd>` and `<kbd>Dropout</kbd>` 💤 instead of a single layer?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Task:** Deciding if a skill is an "AI Skill" or "Cooking" only requires checking if specific keywords exist.
-> *   **The Example:** A massive AI (like a Transformer) is built for understanding complex storylines, which is like using a heavy construction crane just to pick up a single apple.
-> *   **The Result:** Our simple one-layer network is much faster, uses less energy, and gets the job done perfectly.
+> *   **The Problem:** A single-layer model is like a student who only has one way to solve a problem—if the problem changes slightly, they get confused.
+> *   **The Solution:** We added a **Hidden Layer** (16 neurons). This acts like giving the robot extra "thinking space" to find patterns in how different words are used together.
+> *   **The Safety:** We added a `<kbd>Dropout</kbd>` 💤 layer. This randomly turns off 20% of the robot's brain during study time, forcing it to learn multiple ways to find the answer so it doesn't become lazy or over-reliant on just one keyword.
 
 ### 🟣 Q: Why use `<kbd>binary_crossentropy</kbd>` ⚖️ to measure errors?
 
@@ -116,13 +116,14 @@ This document serves as an internal reference for the technical decisions, archi
 >     *   **Recall** 🔍: Out of all the people who were *actually* sick, how many did the model successfully find? (Did it miss anyone in danger?)
 > *   **The Trade-off:** Usually, increasing one lowers the other. The **F1-Score** 🥇 combines them both into a single reliable grade.
 
-### 🟣 Q: What is **Overfitting** ❌, and how do you prevent it in neural networks?
+### 🟣 Q: What is **Overfitting** ❌, and how do you prevent it in this project?
 
 > [!NOTE]
 > **Answer:**
 > *   **The Concept:** **Overfitting** ❌ is like a student who memorizes the exact answers to a practice test but fails the real exam because they never actually learned the *concepts*.
-> *   **The Symptoms:** The model gets a near-perfect score on the training data but performs terribly when shown new, unseen data.
-> *   **The Prevention:** We can use **Dropout** 💤 (randomly turning off a few brain cells during training so it doesn't rely too heavily on one specific path) or **Early Stopping** 🛑 (stopping the training the moment it starts memorizing instead of learning).
+> *   **The Prevention:** Our project uses two senior-level "cheating prevention" tools:
+>     *   **Dropout** 💤: Randomly disabling neurons so the model can't rely on just one "lucky" word.
+>     *   **Early Stopping** 🛑: We set a teacher to watch the model's grades. The moment its "Exam Scores" (**Validation Loss**) stop getting better, the teacher stops the training immediately to save the best version of the brain.
 
 ## 7. Data Handling
 
