@@ -4,6 +4,8 @@ A TensorFlow-powered skill classification system that identifies Google AI Engin
 
 Built following industry-standard ML project architecture, including modular components for data processing, training, evaluation, and prediction.
 
+**Live Web API Demo:** [https://vector-profile-scanner.onrender.com/docs](https://vector-profile-scanner.onrender.com/docs) *(Replace with your actual deployed URL)*
+
 ## Tech Stack
 - **Language**: Python 3.9+
 - **Machine Learning Framework**: TensorFlow / Keras (Sequential Models, TextVectorization)
