@@ -12,6 +12,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 RUN pip install -e .
 
+# Train the model so the container has the model artifacts built-in
+RUN PYTHONPATH=. python -m src.train
+
 # Expose the API port
 EXPOSE 8000
 

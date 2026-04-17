@@ -32,4 +32,4 @@ jobs:
 
     - name: Run Pytest Suite
       run: |
-        pytest tests/
+        PYTHONPATH=. python -m pytest tests/
