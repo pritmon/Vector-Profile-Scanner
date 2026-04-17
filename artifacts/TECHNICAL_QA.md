@@ -247,3 +247,33 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **Raising to `0.8` (High Precision):** If it costs $1000 every time a recruiter interviews a candidate, we want to be *extremely* sure they are relevant. Raising the threshold to `0.8` means the model only flags a profile if it is wildly confident. We might miss some good candidates, but we waste zero money on bad ones.
 > *   **Lowering to `0.2` (High Recall):** If the company is desperate for AI talent and cannot risk missing *anyone* with even a hint of AI experience, we lower the threshold to `0.2`. The recruiters will have to manually reject a lot of false positives, but they are guaranteed to not miss a single hidden gem.
 > *   **The Interview Point:** Threshold tuning proves you don't just blindly accept default ML code, but rather you tune the math to solve the exact constraint (Time vs. False Positives) of the business stakeholder.
+
+---
+
+## 12. Current Market Trends: Traditional ML vs. GenAI (LLMs)
+
+### 🟣 Q: In 2024+, why build a traditional TensorFlow classification model when you could just pass the profile into an LLM (like GPT-4) and ask "Is this an AI Engineer?"
+
+> [!NOTE]
+> **Answer:**
+> *   **Cost & Latency:** Asking an LLM costs money per token and introduces significant latency (often multiple seconds per request). Our analytical TensorFlow model costs effectively $0 to run inference locally and responds in sub-milliseconds. If we process 100,000 resumes a day, an LLM would rack up a massive cloud bill; our model does it for free on a cheap baseline CPU.
+> *   **Determinism:** Generative models can hallucinate or arbitrarily change their reasoning between prompts. A discriminative model (our Sequential architecture) is completely deterministic—given the same profile input, it will mathematically guarantee the exact same probability output 100% of the time, which is critical for legal fairness in hiring.
+> *   **Data Privacy (PII):** Sending raw candidate resumes out to third-party OpenAI or Anthropic APIs introduces severe security and Personally Identifiable Information (PII) leakage risks. Our TensorFlow `.keras` model runs entirely enclosed within our secure, isolated Docker ecosystem. No proprietary data ever leaves the network.
+
+### 🟣 Q: How could this project legally fit into a modern "Retrieval-Augmented Generation" (RAG) architecture?
+
+> [!NOTE]
+> **Answer:**
+> *   **The RAG Pipeline:** A massive corporate HR system might use RAG to let recruiters naturally "chat" with millions of resumes stored in a Vector Database (like Pinecone or Qdrant).
+> *   **The Role of our Scanner:** Before wasting expensive chunking and LLM compute on absolutely irrelevant data, our classification model acts as an algorithmic "Gatekeeper". It can instantly ingest streams of profiles and drop the bottom 80% that score `< 0.3`.
+> *   **The Synergy:** Only the highly probable profiles are fully vetted, vectorized, and passed to the expensive LLM architecture for deep semantic reasoning. Traditional Discriminative ML (our project) + Generative LLM = Extreme pipeline scalability and cost-efficiency.
+
+## 13. MLOps & Production Scalability
+
+### 🟣 Q: Why did we embed the model training step directly inside the `Dockerfile`? Isn't it bad practice to train during an image build?
+
+> [!NOTE]
+> **Answer:**
+> *   **The MLOps Principle (Immutability):** In robust cloud deployments, Docker containers must be entirely "Immutable" (unchangeable) and "Self-Contained". An active FastAPI server should never boot up empty and depend on a fragile script to download external `.keras` weights just to start.
+> *   **The Implementation:** By triggering `python -m src.train` during the CI/CD Docker build phase, the algorithm trains once and bakes the resulting mathematical weights permanently into the immutable Docker image layers.
+> *   **The Scalability Benefit:** If traffic suddenly spikes and Kubernetes spins up 50 new copies of our container to handle the load, every single copy boots instantly in milliseconds because the intelligence is already baked inside it autonomously.
