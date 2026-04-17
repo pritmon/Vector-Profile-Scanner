@@ -27,6 +27,13 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+from fastapi.responses import RedirectResponse
+
+@app.get("/")
+def root_placeholder():
+    # If someone visits the bare URL, instantly bounce them to the Swagger Documentation
+    return RedirectResponse(url="/docs")
+
 class SkillRequest(BaseModel):
     skill: str
     
