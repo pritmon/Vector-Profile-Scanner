@@ -23,28 +23,32 @@ This project is an end-to-end **Machine Learning Classification Pipeline** built
 
 <pre>
 Vector-Profile-Scanner/
-├── <a href="./.github">.github/</a>                # GitHub Actions CI/CD workflows
-├── <a href="./src">src/</a>                    # Core Python modules (model, training, prediction)
-│   ├── <a href="./src/data_loader.py">data_loader.py</a>      # Script to load and preprocess data
-│   ├── <a href="./src/model.py">model.py</a>            # Neural network architecture definition
-│   ├── <a href="./src/train.py">train.py</a>            # Script for training the model
-│   ├── <a href="./src/predict.py">predict.py</a>          # Script to run predictions on new data
-│   └── <a href="./src/api.py">api.py</a>              # FastAPI web server endpoint
-├── <a href="./data">data/</a>                   # Raw and processed datasets needed for training
+├── <a href="./.github">.github/</a>                # CI/CD pipeline automation and MLOps integrations
+├── <a href="./artifacts">artifacts/</a>              # Detailed technical documentation, FAQs, and system glossaries
+├── <a href="./src">src/</a>                    # Core engine for data ingestion, training algorithms, and inference
+│   ├── <a href="./src/api.py">api.py</a>              # Asynchronous FastAPI gateway serving real-time model inference
+│   ├── <a href="./src/config.py">config.py</a>           # Centralized environment constants routing all data and model paths
+│   ├── <a href="./src/data_loader.py">data_loader.py</a>      # Orchestrates dataset ingestion and TextVectorization pipelines
+│   ├── <a href="./src/model.py">model.py</a>            # Compiles the neural network geometry and binary loss functions
+│   ├── <a href="./src/predict.py">predict.py</a>          # Instantiates learned tensors to confidently score new data inputs
+│   ├── <a href="./src/train.py">train.py</a>            # Executes the ML training lifecycle to generate `.keras` weights
+│   └── <a href="./src/utils.py">utils.py</a>            # Reusable resource dependencies enforcing DRY software principles
+├── <a href="./data">data/</a>                   # Data storage layer for raw and processed classification assets
 │   └── <a href="./data/raw">raw/</a>                
-│       └── <a href="./data/raw/skills.csv">skills.csv</a>      # The core dataset containing raw profile skills
-├── <a href="./notebooks">notebooks/</a>              # Exploratory Data Analysis (EDA) Jupyter notebooks
-│   └── <a href="./notebooks/01_data_exploration.ipynb">01_data_exploration.ipynb</a> # Visualizing the dataset imbalance and trends
-├── <a href="./tests">tests/</a>                  # Automated pytest verification suite
-│   ├── <a href="./tests/__init__.py">__init__.py</a>         # Test package initialization
-│   ├── <a href="./tests/test_data_loader.py">test_data_loader.py</a> # Tests for data loading and preprocessing
-│   └── <a href="./tests/test_model.py">test_model.py</a>       # Tests for neural network architecture
-├── <a href="./models">models/</a>                 # Generated artifacts and TensorFlow `.keras` weights
-├── <a href="./requirements.txt">requirements.txt</a>        # Python dependencies
-├── <a href="./setup.py">setup.py</a>                # Package installation configuration
-├── <a href="./Dockerfile">Dockerfile</a>              # Containerization configuration
-├── <a href="./.dockerignore">.dockerignore</a>           # Docker build exclusions
-└── <a href="./README.md">README.md</a>               # Project documentation
+│       └── <a href="./data/raw/skills.csv">skills.csv</a>      # Hand-curated dataset mapping raw strings to probability labels
+├── <a href="./notebooks">notebooks/</a>              # Interactive Jupyter scratchpads for Data Scientists
+│   └── <a href="./notebooks/01_data_exploration.ipynb">01_data_exploration.ipynb</a> # Visual telemetry plotting class imbalances and token trends
+├── <a href="./tests">tests/</a>                  # Automated quality assurance and mathematical constraint suite
+│   ├── <a href="./tests/__init__.py">__init__.py</a>         # Initialization registry for the local test packages
+│   ├── <a href="./tests/test_data_loader.py">test_data_loader.py</a> # Mathematically validates CSV ingestion logic and tensor shapes
+│   └── <a href="./tests/test_model.py">test_model.py</a>       # Asserts the network compiles with correct probability thresholds
+├── <a href="./models">models/</a>                 # Secure artifact directory holding the compiled AI intelligence
+├── <a href="./requirements.txt">requirements.txt</a>        # Hard-coded dependency locker for strict environment clones
+├── <a href="./setup.py">setup.py</a>                # Local package constructor converting `src/` into a pip module
+├── <a href="./Dockerfile">Dockerfile</a>              # Immutable container blueprint assembling the OS and AI engine
+├── <a href="./.dockerignore">.dockerignore</a>           # Security definitions excluding sensitive or bloated cache files
+├── <a href="./LICENSE">LICENSE</a>                 # Formal MIT Open-Source software distribution legality
+└── <a href="./README.md">README.md</a>               # High-level architecture overview and execution instructions
 </pre>
 
 ## Installation
