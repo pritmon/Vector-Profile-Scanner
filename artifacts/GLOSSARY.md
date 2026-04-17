@@ -1,7 +1,7 @@
-# 📖 Vector Profile Scanner: Plain English Glossary
+# 📖 Vector Profile Scanner: Conceptual Glossary
 
 > [!NOTE]
-> This glossary translates complex Machine Learning and Software Engineering jargon into extremely simple, everyday analogies so anyone can understand exactly how our system works.
+> This glossary translates complex Machine Learning and Software Engineering abstractions into concrete, relatable mental models. This accelerates cross-functional understanding of the system's underlying architecture.
 
 ---
 
