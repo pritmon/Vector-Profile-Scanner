@@ -4,12 +4,12 @@ This document serves as an internal reference for the technical decisions, archi
 
 ## 1. Data Processing
 
-### 🟣 Q: Why was `TextVectorization` chosen instead of other word processors?
+### 🟣 Q: Why was `<kbd>TextVectorization</kbd>` 🔠 chosen instead of other word processors?
 
 > [!NOTE]
 > **Answer:**
 > *   **The Problem:** Normally, models need a separate translator standing by to convert words into number codes.
-> *   **The Solution:** `TextVectorization` acts like a dictionary built perfectly into the robot's brain.
+> *   **The Solution:** `<kbd>TextVectorization</kbd>` 🔠 acts like a dictionary built perfectly into the robot's brain.
 > *   **The Benefit:** When the model is active, it doesn't need external help; it translates words to numbers instantly and entirely on its own.
 
 ### 🟣 Q: How does getting the data from the CSV file handle growing bigger?
@@ -17,12 +17,12 @@ This document serves as an internal reference for the technical decisions, archi
 > [!NOTE]
 > **Answer:**
 > *   **Current State:** Reading our CSV file is like reading a short recipe card from start to finish.
-> *   **Scaling Up:** If our recipe book grew to millions of pages, Python natively blocks crashes by letting us read it "page by page" (chunking).
+> *   **Scaling Up:** If our recipe book grew to millions of pages, Python natively blocks crashes by letting us read it "page by page" (**Chunking** 🍰).
 > *   **The Architecture:** The code is structured powerfully so we can swap out small recipe cards for bigger storage smoothly without carrying a heavy book all at once.
 
 ## 2. Model Architecture
 
-### 🟣 Q: Why use a simple Neural Network with just one Dense layer instead of a massive AI structure?
+### 🟣 Q: Why use a simple Neural Network with just one `<kbd>Dense</kbd>` layer instead of a massive AI structure?
 
 > [!NOTE]
 > **Answer:**
@@ -30,12 +30,12 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **The Example:** A massive AI (like a Transformer) is built for understanding complex storylines, which is like using a heavy construction crane just to pick up a single apple.
 > *   **The Result:** Our simple one-layer network is much faster, uses less energy, and gets the job done perfectly.
 
-### 🟣 Q: Why use `binary_crossentropy` to measure errors?
+### 🟣 Q: Why use `<kbd>binary_crossentropy</kbd>` ⚖️ to measure errors?
 
 > [!NOTE]
 > **Answer:**
 > *   **The Game:** Our project is essentially a game of sorting things into exactly two buckets: Bucket 1 (Google Skill) or Bucket 0 (Not Relevant).
-> *   **The Math:** `binary_crossentropy` is the special math formula perfectly designed for two-bucket sorting games.
+> *   **The Math:** `<kbd>binary_crossentropy</kbd>` ⚖️ is the special math formula perfectly designed for two-bucket sorting games.
 > *   **The Score:** It calculates exactly how far off a guess was from landing safely in the correct bucket.
 
 ## 3. Project Structure & Organization
@@ -76,9 +76,9 @@ This document serves as an internal reference for the technical decisions, archi
 
 > [!NOTE]
 > **Answer:**
-> *   **The Server:** We would package the `src/predict.py` file into a web server (like a massive drive-thru window) using tools like FastAPI or Flask.
+> *   **The Server:** We would package the inference file into a web server (like a massive drive-thru window) using **FastAPI** ⚡.
 > *   **The Cloud:** We would place multiple copies of this web server onto a cloud network like AWS or Google Cloud.
-> *   **The Traffic Cop:** A "Load Balancer" would sit at the front, directing incoming scans to whichever server is currently least busy!
+> *   **The Traffic Cop:** A **Load Balancer** 🚦 would sit at the front, directing incoming scans to whichever server is currently least busy!
 
 ### 🟣 Q: If the list of "Must-Have Skills" changes daily, how do we update the model without shutting the system down?
 
@@ -92,17 +92,17 @@ This document serves as an internal reference for the technical decisions, archi
 
 > [!NOTE]
 > **Answer:**
-> *   **The Philosophy:** World-class system design relies heavily on the "Separation of Concerns." 
+> *   **The Philosophy:** World-class system design relies heavily on the **Separation of Concerns** 🧩. 
 > *   **The Implementation:** Notice how our prediction logic (`predict.py`) doesn't care *how* the model was trained. The training logic (`train.py`) doesn't care *where* the data came from. They only communicate through the saved artifacts (`.keras` and `.pkl` files).
-> *   **The Benefit:** Tomorrow, if the client requests to completely rip out TensorFlow and replace it with a massive PyTorch LLM, we only have to rewrite the `build_model()` function. The rest of the pipeline remains entirely unbroken and functional.
+> *   **The Benefit:** Tomorrow, if the client requests to completely rip out TensorFlow and replace it with a massive **PyTorch** 🔥 LLM, we only have to rewrite the `build_model()` function. The rest of the pipeline remains entirely unbroken and functional.
 
-### 🟣 Q: If this was deployed in a highly demanding production environment, how would you handle "Model Drift" over time?
+### 🟣 Q: If this was deployed in a highly demanding production environment, how would you handle **Model Drift** 📉 over time?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Reality:** A model trained perfectly in 2024 will slowly become useless by 2026 as the technology landscape completely shifts (e.g., "Prompt Engineering" wasn't a prominent skill a few years ago). This degradation is called Model Drift.
+> *   **The Reality:** A model trained perfectly in 2024 will slowly become useless by 2026 as the technology landscape completely shifts (e.g., "Prompt Engineering" wasn't a prominent skill a few years ago). This degradation is called **Model Drift** 📉.
 > *   **The Monitoring:** We must implement a "Shadow Mode" deployment or keep a human-in-the-loop to constantly sample the model's predictions. If its mathematical confidence drops, an alert is fired.
-> *   **The CI/CD Loop:** A demanding ML pipeline requires automated triggers. When drift is detected, the system pulls the latest fresh data from the recruiters, automatically kicks off `train.py`, validates the new F1-score against the old one in an isolated test environment, and automatically deploys the heavily updated model.
+> *   **The CI/CD Loop:** A demanding ML pipeline requires automated triggers. When drift is detected, the system pulls the latest fresh data from the recruiters, automatically kicks off training, validates the new **F1-Score** 🥇 against the old one in an isolated test environment, and automatically deploys the heavily updated model.
 
 ## 6. Model Performance & Evaluation
 
@@ -111,18 +111,18 @@ This document serves as an internal reference for the technical decisions, archi
 > [!NOTE]
 > **Answer:**
 > *   **The Problem with Accuracy:** Imagine a hospital testing for a very rare disease where 99 people are healthy and 1 is sick. A model could just blindly guess "healthy" every single time and score 99% accuracy, even though it failed its actual job of finding the sick person.
-> *   **The Solution (Precision & Recall):** We must look at two other numbers. 
->     *   **Precision:** Out of all the people the model *claimed* were sick, how many actually were? (Are there too many false alarms?)
->     *   **Recall:** Out of all the people who were *actually* sick, how many did the model successfully find? (Did it miss anyone in danger?)
-> *   **The Trade-off (F1-Score):** Usually, increasing one lowers the other. The F1-Score combines them into a single reliable grade.
+> *   **The Solution:** We must look at two other numbers. 
+>     *   **Precision** 🎯: Out of all the people the model *claimed* were sick, how many actually were? (Are there too many false alarms?)
+>     *   **Recall** 🔍: Out of all the people who were *actually* sick, how many did the model successfully find? (Did it miss anyone in danger?)
+> *   **The Trade-off:** Usually, increasing one lowers the other. The **F1-Score** 🥇 combines them both into a single reliable grade.
 
-### 🟣 Q: What is "Overfitting", and how do you prevent it in neural networks?
+### 🟣 Q: What is **Overfitting** ❌, and how do you prevent it in neural networks?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Concept:** Overfitting is like a student who memorizes the exact answers to a practice test but fails the real exam because they never actually learned the *concepts*.
+> *   **The Concept:** **Overfitting** ❌ is like a student who memorizes the exact answers to a practice test but fails the real exam because they never actually learned the *concepts*.
 > *   **The Symptoms:** The model gets a near-perfect score on the training data but performs terribly when shown new, unseen data.
-> *   **The Prevention:** We can use **Dropout** (randomly turning off a few brain cells during training so it doesn't rely too heavily on one specific path) or **Early Stopping** (stopping the training the moment it starts memorizing instead of learning).
+> *   **The Prevention:** We can use **Dropout** 💤 (randomly turning off a few brain cells during training so it doesn't rely too heavily on one specific path) or **Early Stopping** 🛑 (stopping the training the moment it starts memorizing instead of learning).
 
 ## 7. Data Handling
 
@@ -143,14 +143,14 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **Dropping:** If only 1% of the rows are missing data, we can safely throw those rows into the trash entirely.
 > *   **Imputation (Guessing):** If 30% of the rows are missing the "salary" column, we can't throw away that much data. Instead, we fill in the blank spaces with the *average* salary of everyone else, or use a smaller ML model to predict what the missing value *should* be.
 
-## 8. Advanced NLP Concepts (Tokens & LLMs)
+## 8. Advanced NLP Concepts 
 
-### 🟣 Q: What exactly is a "Token", and how does the model see it?
+### 🟣 Q: What exactly is a **Token** 🧩, and how does the model see it?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Concept:** A token is the smallest piece of a puzzle. Instead of a model reading the entire sentence "Artificial Intelligence Engineer" as one giant continuous block, it chops it up into three smaller pieces (tokens): "Artificial", "Intelligence", and "Engineer".
-> *   **The Process:** `TextVectorization` splits a phrase into these tokens, counts them up, and assigns a specific number to each unique piece.
+> *   **The Concept:** A **Token** 🧩 is the smallest piece of a puzzle. Instead of a model reading the entire sentence "Artificial Intelligence Engineer" as one giant continuous block, it chops it up into three smaller pieces (tokens): "Artificial", "Intelligence", and "Engineer".
+> *   **The Process:** `<kbd>TextVectorization</kbd>` 🔠 splits a phrase into these tokens, counts them up, and assigns a specific number to each unique piece.
 > *   **The Analogy:** It’s exactly like taking a fully built LEGO spaceship (the phrase) and snapping it back down into individual blue, red, and yellow bricks (tokens) so the robot can count exactly how many of each color there are.
 
 ### 🟣 Q: When processing text or documents, why do we use "Chunks"?
@@ -165,46 +165,46 @@ This document serves as an internal reference for the technical decisions, archi
 
 > [!NOTE]
 > **Answer:**
-> *   **Different Brain Types:** ChatGPT is a *Generative* model (a storyteller)—it generates totally new sentences, and sometimes it gets confused and just confidently makes up a lie (a hallucination) because it wants to finish the story.
-> *   **Our Model:** Our `Sequential` model is an *Analytical/Discriminative* model (a security guard). It doesn't create sentences; it simply looks at an ID (the tokens) and outputs a percentage (e.g., "I am 90% sure this is a Google Skill").
+> *   **Different Brain Types:** ChatGPT is a **Generative** ✍️ model (a storyteller)—it generates totally new sentences, and sometimes it gets confused and just confidently makes up a lie (a hallucination) because it wants to finish the story.
+> *   **Our Model:** Our model is an **Analytical/Discriminative** 🛡️ model (a security guard). It doesn't create sentences; it simply looks at an ID (the tokens) and outputs a percentage (e.g., "I am 90% sure this is a Google Skill").
 > *   **The False Positive:** Because it only outputs a math percentage from 0% to 100%, it cannot "hallucinate" a fake skill. The worst mistake it can make is a "False Positive"—acting like an overly eager security guard who mistakenly lets a regular employee into a VIP room.
 
 ## 9. TensorFlow & Market Demands
 
-### 🟣 Q: Why choose TensorFlow/Keras over PyTorch for this specific project?
+### 🟣 Q: Why choose **TensorFlow** 🧠 over **PyTorch** 🔥 for this specific project?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Market Reality:** While PyTorch is extremely popular for *academic research* and building brand new experimental architectures, TensorFlow (paired with Keras) absolutely dominates *Enterprise Production*.
+> *   **The Market Reality:** While PyTorch is extremely popular for *academic research* and building brand new experimental architectures, **TensorFlow** 🧠 absolutely dominates *Enterprise Production*.
 > *   **The Project Need:** For a production-ready application like our Vector Profile Scanner, we don't need to invent new math; we need rapid deployment, stable APIs, and easy serving (like TF Serving or TFLite for mobile).
 > *   **The Analogy:** PyTorch is a highly customizable laboratory for a mad scientist to build new engines from scratch. TensorFlow is the massive Toyota factory that quickly and reliably builds 1,000 standard cars every day for the real world.
 
-### 🟣 Q: Why is saving the model as `.keras` important compared to older `.h5` formats?
+### 🟣 Q: Why is saving the model as `<kbd>.keras</kbd>` important compared to older `.h5` formats?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Evolution:** In modern TensorFlow (version 2.13+), the official and safest way to save a model is utilizing the new, native `.keras` format (which we use in our project!).
-> *   **The Benefit:** The older `.h5` format sometimes struggled to accurately save custom layers (like our `TextVectorization` layer).
+> *   **The Evolution:** In modern TensorFlow (version 2.13+), the official and safest way to save a model is utilizing the new, native `<kbd>.keras</kbd>` format (which we use in our project!).
+> *   **The Benefit:** The older `.h5` format sometimes struggled to accurately save custom layers (like our `<kbd>TextVectorization</kbd>` 🔠 layer).
 > *   **The Modern Standard:** Using `.keras` proves to an employer that you are up-to-date with modern 2024+ ML engineering standards rather than relying on outdated 2019 tutorials.
 
-### 🟣 Q: What is a "Tensor" and why is the framework named after it?
+### 🟣 Q: What is a **Tensor** 🔢 and why is the framework named after it?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Concept:** A "Tensor" is just a fancy mathematical word for a multi-dimensional array or a grid of numbers. 
+> *   **The Concept:** A **Tensor** 🔢 is just a fancy mathematical word for a multi-dimensional array or a grid of numbers. 
 >     *   A single number (Speed: 50) is a *Scalar*.
 >     *   A list of numbers (Coordinates: [10, 20]) is a *Vector*.
 >     *   A grid of numbers (An image with pixels) is a *Matrix*.
 >     *   Once you stack grids on top of grids (like video frames), we just simplify and call everything a *Tensor*.
 > *   **The Flow:** The framework is named "TensorFlow" because data (represented as these number grids) literally "flows" continuously through the layers of the neural network during training.
 
-### 🟣 Q: Exactly how are Tensors being used inside this Vector Profile Scanner code?
+### 🟣 Q: Exactly how are **Tensors** 🔢 being used inside this Vector Profile Scanner code?
 
 > [!NOTE]
 > **Answer:**
 > *   **Converting Labels:** In `data_loader.py`, we load the raw target labels (1s and 0s) from the CSV into a standard Python list. Neural networks can't run math on standard lists, so we use `tf.constant(labels)` to convert that list directly into a 1-Dimensional Tensor.
-> *   **Converting Words:** In `train.py`, the `TextVectorization` layer takes raw text strings and builds a massive 2-Dimensional Tensor grid composed of 1s and 0s (representing which vocabulary tokens exist).
-> *   **The "Flow":** During `model.fit(X, labels)`, these two massive Tensors (the 2D text grid and the 1D answers) are literally flowing into the Dense layer to run millions of quick matrix multiplications during training.
+> *   **Converting Words:** In `train.py`, the `<kbd>TextVectorization</kbd>` 🔠 layer takes raw text strings and builds a massive 2-Dimensional Tensor grid composed of 1s and 0s (representing which vocabulary tokens exist).
+> *   **The "Flow":** During `model.fit()`, these two massive Tensors (the 2D text grid and the 1D answers) are literally flowing into the Dense layer to run millions of quick matrix multiplications during training.
 
 ---
 
@@ -218,19 +218,19 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **Defining the "Golden Standard":** To finalize requirements, we sit with the Subject Matter Experts (senior recruiters in this case) to understand *exactly* how a human makes the decision. We translated their human intuition of what counts as an "AI Skill" into concrete, measurable `.csv` data rows.
 > *   **The MVP Agreement (Minimum Viable Product):** Demanding clients want perfection instantly. The key to finalizing requirements is agreeing that a 100% perfect AI is a multi-year project. We agreed on an MVP specification: the system only needs to confidently identify and filter out the bottom 80% of irrelevant profiles immediately, allowing the recruiters to spend their valuable time purely on the ambiguous top 20%.
 
-### 🟣 Q: How do you handle changing business demands mid-project (e.g., the client suddenly asks if the model can also read GitHub JSON repos instead of just text)?
+### 🟣 Q: How do you handle changing business demands mid-project?
 
 > [!NOTE]
 > **Answer:**
 > *   **The Agile Evaluation:** First, we evaluate the architectural impact. Adding an entirely new JSON data structure is a massive pivot, not a minor tweak to the neural network.
-> *   **Leveraging Modular Architecture:** Because our Scanner was built smartly, separating the `data_loader.py` logic from the `model.py` logic, the core engine survives. We would only need to write a new data-fetching script to plug into the completely unmodified `model.py` training pipeline.
+> *   **Leveraging Modular Architecture:** Because our Scanner was built smartly, separating the pipeline logic from the model logic, the core engine survives. We would only need to write a new data-fetching script to plug into the completely unmodified training engine.
 > *   **The Negotiation:** We confidently communicate the trade-offs back to the client: "Our architecture makes this incredibly easy, however, developing the new data connections will stretch the delivery timeline by exactly two weeks. Shall we add this as Phase 2, or officially pivot Phase 1's budget right now?" Giving them complete visibility prevents scope creep.
 
 ---
 
 ## 11. Model Confidence & Probability Thresholds
 
-### 🟣 Q: The model outputs a single number like `0.86`. How does the Dense layer actually compute a "Confidence Score" between 0 and 1?
+### 🟣 Q: The model outputs a single number like `0.86`. How does the `<kbd>Dense</kbd>` layer actually compute a "Confidence Score" between 0 and 1?
 
 > [!NOTE]
 > **Answer:**
@@ -239,32 +239,31 @@ This document serves as an internal reference for the technical decisions, archi
 > *   **The Squeeze:** Sigmoid acts as a mathematical "squasher". It takes any output number from negative infinity to positive infinity and elegantly squeezes it into a strict probability curve between `0.0` and `1.0`.
 > *   **The Result:** This squashed number (e.g., `0.86`) is treated as the model's "Confidence Score," representing an 86% probability that the profile belongs to the positive class (Google AI Engineer).
 
-### 🟣 Q: Your `predict.py` script uses a default threshold of `0.5` to make a final decision. In a real business scenario, why might you manually change this threshold to `0.8` or `0.2`?
+### 🟣 Q: Your inference script uses a default threshold of `0.5` to make a final decision. In a real business scenario, why might you manually change this threshold to `0.8` or `0.2`?
 
 > [!NOTE]
 > **Answer:**
-> *   **The Trade-off:** Changing the threshold is how we balance between **Precision** (avoiding false alarms) and **Recall** (catching every single possibility).
+> *   **The Trade-off:** Changing the threshold is how we balance between **Precision** 🎯 (avoiding false alarms) and **Recall** 🔍 (catching every single possibility).
 > *   **Raising to `0.8` (High Precision):** If it costs $1000 every time a recruiter interviews a candidate, we want to be *extremely* sure they are relevant. Raising the threshold to `0.8` means the model only flags a profile if it is wildly confident. We might miss some good candidates, but we waste zero money on bad ones.
 > *   **Lowering to `0.2` (High Recall):** If the company is desperate for AI talent and cannot risk missing *anyone* with even a hint of AI experience, we lower the threshold to `0.2`. The recruiters will have to manually reject a lot of false positives, but they are guaranteed to not miss a single hidden gem.
-> *   **The Interview Point:** Threshold tuning proves you don't just blindly accept default ML code, but rather you tune the math to solve the exact constraint (Time vs. False Positives) of the business stakeholder.
 
 ---
 
 ## 12. Current Market Trends: Traditional ML vs. GenAI (LLMs)
 
-### 🟣 Q: In 2024+, why build a traditional TensorFlow classification model when you could just pass the profile into an LLM (like GPT-4) and ask "Is this an AI Engineer?"
+### 🟣 Q: In 2024+, why build a traditional **TensorFlow** 🧠 classification model when you could just pass the profile into an LLM (like GPT-4) and ask "Is this an AI Engineer?"
 
 > [!NOTE]
 > **Answer:**
-> *   **Cost & Latency:** Asking an LLM costs money per token and introduces significant latency (often multiple seconds per request). Our analytical TensorFlow model costs effectively $0 to run inference locally and responds in sub-milliseconds. If we process 100,000 resumes a day, an LLM would rack up a massive cloud bill; our model does it for free on a cheap baseline CPU.
-> *   **Determinism:** Generative models can hallucinate or arbitrarily change their reasoning between prompts. A discriminative model (our Sequential architecture) is completely deterministic—given the same profile input, it will mathematically guarantee the exact same probability output 100% of the time, which is critical for legal fairness in hiring.
-> *   **Data Privacy (PII):** Sending raw candidate resumes out to third-party OpenAI or Anthropic APIs introduces severe security and Personally Identifiable Information (PII) leakage risks. Our TensorFlow `.keras` model runs entirely enclosed within our secure, isolated Docker ecosystem. No proprietary data ever leaves the network.
+> *   **Cost & Latency:** Asking an LLM costs money per token and introduces significant latency. Our analytical model costs effectively $0 to run inference locally and responds in sub-milliseconds. If we process 100,000 resumes a day, an LLM would rack up a massive cloud bill; our model does it for free on a cheap baseline CPU.
+> *   **Determinism:** **Generative** ✍️ models can hallucinate or arbitrarily change their reasoning between prompts. A **Discriminative** 🛡️ model (like ours) is completely deterministic—given the same profile input, it will mathematically guarantee the exact same probability output 100% of the time, which is critical for legal fairness in hiring.
+> *   **Data Privacy (PII):** Sending raw candidate resumes out to third-party APIs introduces severe security and Personally Identifiable Information (PII) leakage risks. Our `<kbd>.keras</kbd>` model runs entirely enclosed within our secure, isolated **Docker** 🐳 ecosystem. No proprietary data ever leaves the network.
 
-### 🟣 Q: How could this project legally fit into a modern "Retrieval-Augmented Generation" (RAG) architecture?
+### 🟣 Q: How could this project legally fit into a modern **RAG (Retrieval-Augmented Generation)** 📚 architecture?
 
 > [!NOTE]
 > **Answer:**
-> *   **The RAG Pipeline:** A massive corporate HR system might use RAG to let recruiters naturally "chat" with millions of resumes stored in a Vector Database (like Pinecone or Qdrant).
+> *   **The RAG Pipeline:** A massive corporate HR system might use RAG to let recruiters naturally "chat" with millions of resumes stored in a Vector Database.
 > *   **The Role of our Scanner:** Before wasting expensive chunking and LLM compute on absolutely irrelevant data, our classification model acts as an algorithmic "Gatekeeper". It can instantly ingest streams of profiles and drop the bottom 80% that score `< 0.3`.
 > *   **The Synergy:** Only the highly probable profiles are fully vetted, vectorized, and passed to the expensive LLM architecture for deep semantic reasoning. Traditional Discriminative ML (our project) + Generative LLM = Extreme pipeline scalability and cost-efficiency.
 
@@ -274,9 +273,9 @@ This document serves as an internal reference for the technical decisions, archi
 
 > [!NOTE]
 > **Answer:**
-> *   **The MLOps Principle (Immutability):** In robust cloud deployments, Docker containers must be entirely "Immutable" (unchangeable) and "Self-Contained". An active FastAPI server should never boot up empty and depend on a fragile script to download external `.keras` weights just to start.
-> *   **The Implementation:** By triggering `python -m src.train` during the CI/CD Docker build phase, the algorithm trains once and bakes the resulting mathematical weights permanently into the immutable Docker image layers.
-> *   **The Scalability Benefit:** If traffic suddenly spikes and Kubernetes spins up 50 new copies of our container to handle the load, every single copy boots instantly in milliseconds because the intelligence is already baked inside it autonomously.
+> *   **The MLOps Principle (Immutability):** In robust cloud deployments, **Docker** 🐳 containers must be entirely "Immutable" 🛡️ (unchangeable) and "Self-Contained". An active **FastAPI** ⚡ server should never boot up empty and depend on a fragile script to download external weights just to start.
+> *   **The Implementation:** By triggering `python -m src.train` during the **CI/CD** 🔄 Docker build phase, the algorithm trains once and bakes the resulting mathematical weights permanently into the immutable Docker image layers.
+> *   **The Scalability Benefit:** If traffic suddenly spikes and **Kubernetes** ☸️ spins up 50 new copies of our container to handle the load, every single copy boots instantly in milliseconds because the intelligence is already baked inside it autonomously.
 
 ---
 
@@ -286,8 +285,8 @@ This document serves as an internal reference for the technical decisions, archi
 
 > [!NOTE]
 > **Answer:**
-> *   **Phase 1 (The Sandbox):** I started by building everything in one single, messy file. My only goal here was to see if the robot brain (TensorFlow) could actually learn the difference between useful AI skills and random everyday words. Once I proved it was smart enough to learn, I moved on.
+> *   **Phase 1 (The Sandbox):** I started by building everything in one single, messy file. My only goal here was to see if the robot brain (**TensorFlow** 🧠) could actually learn the difference between useful AI skills and random everyday words. Once I proved it was smart enough to learn, I moved on.
 > *   **Phase 2 (Organizing the Mess):** Putting everything in one giant file is like throwing all your clothes, toys, and books into a single pile on the floor. I cleaned it up by giving everything its own room. I made a `data/` folder for the raw information, a `src/` folder for the main engine and training instructions, and a `models/` folder to safely store the robot's brain. I also created a central map (`src/config.py`) so the folders wouldn't get confused trying to find each other.
 > *   **Phase 3 (Setting Rules & Tests):** Next, I needed to make sure the robot wasn't just memorizing the exact answers (like cheating on a spelling test). I lowered its training loops so it was forced to actually understand the concepts. I also wrote automatic tests using `pytest`. These automatic tests act like a strict teacher grading the system's homework every time I save the code to ensure nothing gets broken.
-> *   **Phase 4 (Building a Storefront):** Nobody could talk to my robot while it was hidden on my computer. So, I built a fast digital storefront (FastAPI) so anyone could send it questions. Then, I packed the robot, the storefront, and all its tools safely inside a standardized digital shipping box (Docker). I even made sure the robot trained itself *while* it was jumping into the box, so it arrived at the destination with its brain completely packed.
-> *   **Phase 5 (The Factory Assembly Line):** Finally, I set up a fully automated assembly line on the cloud (GitHub Actions). Now, whenever I try to add new code, the factory robots automatically run my teacher tests to see if I made a mistake. If my new code fails the test, the assembly line immediately halts before the broken box ever reaches the real world.
+> *   **Phase 4 (Building a Storefront):** Nobody could talk to my robot while it was hidden on my computer. So, I built a fast digital storefront (**FastAPI** ⚡) so anyone could send it questions. Then, I packed the robot, the storefront, and all its tools safely inside a standardized digital shipping box (**Docker** 🐳). I even made sure the robot trained itself *while* it was jumping into the box, so it arrived at the destination with its brain completely packed.
+> *   **Phase 5 (The Factory Assembly Line):** Finally, I set up a fully automated assembly line on the cloud (**GitHub Actions** 🤖). Now, whenever I try to add new code, the factory robots automatically run my teacher tests to see if I made a mistake. If my new code fails the test, the assembly line immediately halts before the broken box ever reaches the real world.
