@@ -1,31 +1,474 @@
 skill,label
 Python,1
+Expert in Python,1
+Python developer,1
+Applied Python,1
 TensorFlow,1
+Expert in TensorFlow,1
+TensorFlow developer,1
+Applied TensorFlow,1
 Vertex AI,1
+Expert in Vertex AI,1
+Vertex AI developer,1
+Applied Vertex AI,1
 NLP,1
+Expert in NLP,1
+NLP developer,1
+Applied NLP,1
 BigQuery,1
+Expert in BigQuery,1
+BigQuery developer,1
+Applied BigQuery,1
 Deep Learning,1
+Expert in Deep Learning,1
+Deep Learning developer,1
+Applied Deep Learning,1
 Machine Learning,1
+Expert in Machine Learning,1
+Machine Learning developer,1
+Applied Machine Learning,1
 Computer Vision,1
+Expert in Computer Vision,1
+Computer Vision developer,1
+Applied Computer Vision,1
 MLOps,1
+Expert in MLOps,1
+MLOps developer,1
+Applied MLOps,1
 Data Engineering,1
+Expert in Data Engineering,1
+Data Engineering developer,1
+Applied Data Engineering,1
 Generative AI,1
+Expert in Generative AI,1
+Generative AI developer,1
+Applied Generative AI,1
 LLM Training,1
+Expert in LLM Training,1
+LLM Training developer,1
+Applied LLM Training,1
 Prompt Engineering,1
+Expert in Prompt Engineering,1
+Prompt Engineering developer,1
+Applied Prompt Engineering,1
 Keras,1
+Expert in Keras,1
+Keras developer,1
+Applied Keras,1
 PyTorch,1
-
+Expert in PyTorch,1
+PyTorch developer,1
+Applied PyTorch,1
+LangChain,1
+Expert in LangChain,1
+LangChain developer,1
+Applied LangChain,1
+Vector Databases,1
+Expert in Vector Databases,1
+Vector Databases developer,1
+Applied Vector Databases,1
+Pinecone,1
+Expert in Pinecone,1
+Pinecone developer,1
+Applied Pinecone,1
+Qdrant,1
+Expert in Qdrant,1
+Qdrant developer,1
+Applied Qdrant,1
+ChromaDB,1
+Expert in ChromaDB,1
+ChromaDB developer,1
+Applied ChromaDB,1
+Transformers,1
+Expert in Transformers,1
+Transformers developer,1
+Applied Transformers,1
+HuggingFace,1
+Expert in HuggingFace,1
+HuggingFace developer,1
+Applied HuggingFace,1
+OpenAI API,1
+Expert in OpenAI API,1
+OpenAI API developer,1
+Applied OpenAI API,1
+GPT-4,1
+Expert in GPT-4,1
+GPT-4 developer,1
+Applied GPT-4,1
+LLaMA,1
+Expert in LLaMA,1
+LLaMA developer,1
+Applied LLaMA,1
+Claude Anthropic,1
+Expert in Claude Anthropic,1
+Claude Anthropic developer,1
+Applied Claude Anthropic,1
+AutoML,1
+Expert in AutoML,1
+AutoML developer,1
+Applied AutoML,1
+Google Cloud ML,1
+Expert in Google Cloud ML,1
+Google Cloud ML developer,1
+Applied Google Cloud ML,1
+Data Science,1
+Expert in Data Science,1
+Data Science developer,1
+Applied Data Science,1
+Artificial Intelligence,1
+Expert in Artificial Intelligence,1
+Artificial Intelligence developer,1
+Applied Artificial Intelligence,1
+Semantic Search,1
+Expert in Semantic Search,1
+Semantic Search developer,1
+Applied Semantic Search,1
+RAG,1
+Expert in RAG,1
+RAG developer,1
+Applied RAG,1
+Retrieval Augmented Generation,1
+Expert in Retrieval Augmented Generation,1
+Retrieval Augmented Generation developer,1
+Applied Retrieval Augmented Generation,1
+Neural Networks,1
+Expert in Neural Networks,1
+Neural Networks developer,1
+Applied Neural Networks,1
+CNN,1
+Expert in CNN,1
+CNN developer,1
+Applied CNN,1
+RNN,1
+Expert in RNN,1
+RNN developer,1
+Applied RNN,1
+Jupyter,1
+Expert in Jupyter,1
+Jupyter developer,1
+Applied Jupyter,1
+Pandas DataFrames,1
+Expert in Pandas DataFrames,1
+Pandas DataFrames developer,1
+Applied Pandas DataFrames,1
+SciPy,1
+Expert in SciPy,1
+SciPy developer,1
+Applied SciPy,1
+Scikit-Learn,1
+Expert in Scikit-Learn,1
+Scikit-Learn developer,1
+Applied Scikit-Learn,1
+XGBoost,1
+Expert in XGBoost,1
+XGBoost developer,1
+Applied XGBoost,1
+LightGBM,1
+Expert in LightGBM,1
+LightGBM developer,1
+Applied LightGBM,1
+Reinforcement Learning,1
+Expert in Reinforcement Learning,1
+Reinforcement Learning developer,1
+Applied Reinforcement Learning,1
+KubeFlow,1
+Expert in KubeFlow,1
+KubeFlow developer,1
+Applied KubeFlow,1
+MLflow,1
+Expert in MLflow,1
+MLflow developer,1
+Applied MLflow,1
+Model Tuning,1
+Expert in Model Tuning,1
+Model Tuning developer,1
+Applied Model Tuning,1
+LoRA,1
+Expert in LoRA,1
+LoRA developer,1
+Applied LoRA,1
+PEFT,1
+Expert in PEFT,1
+PEFT developer,1
+Applied PEFT,1
+Stable Diffusion,1
+Expert in Stable Diffusion,1
+Stable Diffusion developer,1
+Applied Stable Diffusion,1
 Excel,0
+Expert in Excel,0
+Excel specialist,0
+Applied Excel,0
 Cooking,0
+Expert in Cooking,0
+Cooking specialist,0
+Applied Cooking,0
 Dancing,0
+Expert in Dancing,0
+Dancing specialist,0
+Applied Dancing,0
 Photoshop,0
+Expert in Photoshop,0
+Photoshop specialist,0
+Applied Photoshop,0
 Marketing,0
+Expert in Marketing,0
+Marketing specialist,0
+Applied Marketing,0
 Data Entry,0
+Expert in Data Entry,0
+Data Entry specialist,0
+Applied Data Entry,0
 Accounting,0
+Expert in Accounting,0
+Accounting specialist,0
+Applied Accounting,0
 Sales,0
+Expert in Sales,0
+Sales specialist,0
+Applied Sales,0
 Customer Support,0
+Expert in Customer Support,0
+Customer Support specialist,0
+Applied Customer Support,0
 Graphic Design,0
+Expert in Graphic Design,0
+Graphic Design specialist,0
+Applied Graphic Design,0
 HR Management,0
+Expert in HR Management,0
+HR Management specialist,0
+Applied HR Management,0
 Manual Testing,0
+Expert in Manual Testing,0
+Manual Testing specialist,0
+Applied Manual Testing,0
 Banking Operations,0
+Expert in Banking Operations,0
+Banking Operations specialist,0
+Applied Banking Operations,0
 Payroll Processing,0
+Expert in Payroll Processing,0
+Payroll Processing specialist,0
+Applied Payroll Processing,0
+Cooking scrambled eggs,0
+Expert in Cooking scrambled eggs,0
+Cooking scrambled eggs specialist,0
+Applied Cooking scrambled eggs,0
+Kitchen Management,0
+Expert in Kitchen Management,0
+Kitchen Management specialist,0
+Applied Kitchen Management,0
+Chef,0
+Expert in Chef,0
+Chef specialist,0
+Applied Chef,0
+Baking,0
+Expert in Baking,0
+Baking specialist,0
+Applied Baking,0
+Construction,0
+Expert in Construction,0
+Construction specialist,0
+Applied Construction,0
+Plumber,0
+Expert in Plumber,0
+Plumber specialist,0
+Applied Plumber,0
+Electrician,0
+Expert in Electrician,0
+Electrician specialist,0
+Applied Electrician,0
+Customer Service,0
+Expert in Customer Service,0
+Customer Service specialist,0
+Applied Customer Service,0
+Support Ticket,0
+Expert in Support Ticket,0
+Support Ticket specialist,0
+Applied Support Ticket,0
+Recruiting,0
+Expert in Recruiting,0
+Recruiting specialist,0
+Applied Recruiting,0
+SEO,0
+Expert in SEO,0
+SEO specialist,0
+Applied SEO,0
+Copywriting,0
+Expert in Copywriting,0
+Copywriting specialist,0
+Applied Copywriting,0
+Design,0
+Expert in Design,0
+Design specialist,0
+Applied Design,0
+Figma,0
+Expert in Figma,0
+Figma specialist,0
+Applied Figma,0
+Teaching,0
+Expert in Teaching,0
+Teaching specialist,0
+Applied Teaching,0
+Driving,0
+Expert in Driving,0
+Driving specialist,0
+Applied Driving,0
+Truck Driver,0
+Expert in Truck Driver,0
+Truck Driver specialist,0
+Applied Truck Driver,0
+Delivery,0
+Expert in Delivery,0
+Delivery specialist,0
+Applied Delivery,0
+Yoga,0
+Expert in Yoga,0
+Yoga specialist,0
+Applied Yoga,0
+Fitness,0
+Expert in Fitness,0
+Fitness specialist,0
+Applied Fitness,0
+Finance,0
+Expert in Finance,0
+Finance specialist,0
+Applied Finance,0
+Bookkeeping,0
+Expert in Bookkeeping,0
+Bookkeeping specialist,0
+Applied Bookkeeping,0
+Real Estate,0
+Expert in Real Estate,0
+Real Estate specialist,0
+Applied Real Estate,0
+React JS,0
+Expert in React JS,0
+React JS specialist,0
+Applied React JS,0
+Frontend Development,0
+Expert in Frontend Development,0
+Frontend Development specialist,0
+Applied Frontend Development,0
+CSS,0
+Expert in CSS,0
+CSS specialist,0
+Applied CSS,0
+HTML,0
+Expert in HTML,0
+HTML specialist,0
+Applied HTML,0
+Node.js,0
+Expert in Node.js,0
+Node.js specialist,0
+Applied Node.js,0
+Express,0
+Expert in Express,0
+Express specialist,0
+Applied Express,0
+Web Development,0
+Expert in Web Development,0
+Web Development specialist,0
+Applied Web Development,0
+Mobile App Development,0
+Expert in Mobile App Development,0
+Mobile App Development specialist,0
+Applied Mobile App Development,0
+iOS Developer,0
+Expert in iOS Developer,0
+iOS Developer specialist,0
+Applied iOS Developer,0
+Android,0
+Expert in Android,0
+Android specialist,0
+Applied Android,0
+Swift,0
+Expert in Swift,0
+Swift specialist,0
+Applied Swift,0
+Kotlin,0
+Expert in Kotlin,0
+Kotlin specialist,0
+Applied Kotlin,0
+PHP,0
+Expert in PHP,0
+PHP specialist,0
+Applied PHP,0
+Laravel,0
+Expert in Laravel,0
+Laravel specialist,0
+Applied Laravel,0
+WordPress,0
+Expert in WordPress,0
+WordPress specialist,0
+Applied WordPress,0
+Joomla,0
+Expert in Joomla,0
+Joomla specialist,0
+Applied Joomla,0
+MySQL DBA,0
+Expert in MySQL DBA,0
+MySQL DBA specialist,0
+Applied MySQL DBA,0
+Network Admin,0
+Expert in Network Admin,0
+Network Admin specialist,0
+Applied Network Admin,0
+IT Support,0
+Expert in IT Support,0
+IT Support specialist,0
+Applied IT Support,0
+Helpdesk,0
+Expert in Helpdesk,0
+Helpdesk specialist,0
+Applied Helpdesk,0
+SAP HANA,0
+Expert in SAP HANA,0
+SAP HANA specialist,0
+Applied SAP HANA,0
+Event Planning,0
+Expert in Event Planning,0
+Event Planning specialist,0
+Applied Event Planning,0
+Video Editing,0
+Expert in Video Editing,0
+Video Editing specialist,0
+Applied Video Editing,0
+Premiere Pro,0
+Expert in Premiere Pro,0
+Premiere Pro specialist,0
+Applied Premiere Pro,0
+Salesforce CRM,0
+Expert in Salesforce CRM,0
+Salesforce CRM specialist,0
+Applied Salesforce CRM,0
+Customer Success,0
+Expert in Customer Success,0
+Customer Success specialist,0
+Applied Customer Success,0
+Business Analyst,0
+Expert in Business Analyst,0
+Business Analyst specialist,0
+Applied Business Analyst,0
+Supply Chain,0
+Expert in Supply Chain,0
+Supply Chain specialist,0
+Applied Supply Chain,0
+Logistics,0
+Expert in Logistics,0
+Logistics specialist,0
+Applied Logistics,0
+I know how to cook,0
+I can drive a truck,0
+Good at math,0
+Waking up early,0
+Playing video games,0
+Building houses,0
+Writing emails,0
+Microsoft Word,0
+Powerpoint Presentations,0
+Cooking scrambled eggs in the kitchen,0
+Making dinner,0
+Eating food,0
+Talking to customers over the phone,0
