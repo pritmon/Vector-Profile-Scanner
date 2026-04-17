@@ -1,29 +1,31 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import tensorflow as tf
-import pickle
+from contextlib import asynccontextmanager
+from src.utils import load_inference_artifacts
+from src.config import MODEL_PATH, VOCAB_PATH
+
+# Global artifacts
+artifacts = {}
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Load artifacts on startup
+    try:
+        model, vectorizer = load_inference_artifacts(MODEL_PATH, VOCAB_PATH)
+        artifacts["model"] = model
+        artifacts["vectorizer"] = vectorizer
+    except FileNotFoundError as e:
+        print(f"Warning: {e}")
+    yield
+    # Clean up on shutdown
+    artifacts.clear()
 
 app = FastAPI(
     title="Vector Profile Scanner API",
-    description="A Machine Learning API to classify if a candidate's skills are relevant for a Google AI Engineer."
+    description="A Machine Learning API to classify if a candidate's skills are relevant for a Google AI Engineer.",
+    lifespan=lifespan
 )
-
-# Initialize global model variables
-model = None
-vectorizer = None
-
-@app.on_event("startup")
-def load_artifacts():
-    global model, vectorizer
-    model = tf.keras.models.load_model('models/skill_classifier.keras')
-    with open('models/vectorizer_vocab.pkl', 'rb') as f:
-        vocab = pickle.load(f)
-    vectorizer = tf.keras.layers.TextVectorization(
-        output_mode='count',
-        standardize='lower_and_strip_punctuation',
-        split='whitespace'
-    )
-    vectorizer.set_vocabulary(vocab)
 
 class SkillRequest(BaseModel):
     skill: str
@@ -35,6 +37,16 @@ class PredictionResponse(BaseModel):
 
 @app.post("/predict", response_model=PredictionResponse)
 def predict_skill(request: SkillRequest):
+    model = artifacts.get("model")
+    vectorizer = artifacts.get("vectorizer")
+    
+    if not model or not vectorizer:
+        return {
+            "skill": request.skill,
+            "classification": "Model not loaded",
+            "confidence": 0.0
+        }
+
     # Run vectorization
     X = vectorizer([request.skill])
     

@@ -88,3 +88,6 @@ Navigate to `http://localhost:8000/docs` in your browser to use the interactive 
 docker build -t vector-profile-scanner .
 docker run -p 8000:8000 vector-profile-scanner
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

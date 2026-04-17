@@ -7,8 +7,9 @@ artifacts to the `models/` directory.
 """
 import pickle
 import os
-from data_loader import load_data, create_vectorizer
-from model import build_model
+from src.data_loader import load_data, create_vectorizer
+from src.model import build_model
+from src.config import MODEL_DIR, MODEL_PATH, VOCAB_PATH
 
 def train():
     """
@@ -18,8 +19,8 @@ def train():
     1. Loads dataset of skills and labels.
     2. Initializes and adapts the TextVectorizer.
     3. Builds a dense Sequential model.
-    4. Trains the model for 500 epochs.
-    5. Saves the model and vocabulary locally.
+    4. Trains the model for 100 epochs.
+    5. Saves the model and vocabulary artifacts.
     """
     print("Loading data...")
     data, labels = load_data()
@@ -40,7 +41,8 @@ def train():
     model = build_model(input_shape=X_train.shape[1])
     
     print("Training model...")
-    model.fit(X_train, y_train, epochs=500, verbose=0)
+    # Reduced epochs to 100 to prevent overfitting on the small dataset
+    model.fit(X_train, y_train, epochs=100, verbose=0)
     
     print("\n--- Evaluating Model on Test Data ---")
     predictions = model.predict(X_test, verbose=0)
@@ -48,16 +50,15 @@ def train():
     
     print(classification_report(y_test, y_pred, target_names=["Non-relevant", "AI Skill"]))
 
-    
     print("Saving model and vectorizer...")
-    os.makedirs('models', exist_ok=True)
-    model.save('models/skill_classifier.keras')
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    model.save(MODEL_PATH)
     
     # Save the vectorizer's vocabulary for predicting later
-    with open('models/vectorizer_vocab.pkl', 'wb') as f:
+    with open(VOCAB_PATH, 'wb') as f:
         pickle.dump(vectorizer.get_vocabulary(), f)
         
-    print("Training complete! Model saved to models/")
+    print(f"Training complete! Model saved to {MODEL_DIR}")
 
 if __name__ == '__main__':
     train()

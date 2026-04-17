@@ -9,6 +9,15 @@ setup(
         "pytest==8.2.2",
         "notebook==7.2.1",
         "pandas==2.2.2",
-        "matplotlib==3.9.0"
+        "matplotlib==3.9.0",
+        "scikit-learn",
+        "fastapi",
+        "uvicorn"
+    ],
+    license="MIT",
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
     ],
 )

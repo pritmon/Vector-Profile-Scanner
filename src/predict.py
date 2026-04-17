@@ -6,29 +6,10 @@ and provides a command-line interface to classify if a given skill is relevant
 to a Google AI Engineer role.
 """
 import tensorflow as tf
-import pickle
+import os
 import argparse
-
-def load_inference_artifacts():
-    """
-    Loads the trained model and recreates the TextVectorization layer.
-    
-    Returns:
-        tuple: (Compiled Keras model, Initialized TextVectorization layer)
-    """
-    model = tf.keras.models.load_model('models/skill_classifier.keras')
-    
-    with open('models/vectorizer_vocab.pkl', 'rb') as f:
-        vocab = pickle.load(f)
-        
-    vectorizer = tf.keras.layers.TextVectorization(
-        output_mode='count',
-        standardize='lower_and_strip_punctuation',
-        split='whitespace'
-    )
-    vectorizer.set_vocabulary(vocab)
-    
-    return model, vectorizer
+from src.utils import load_inference_artifacts
+from src.config import MODEL_PATH, VOCAB_PATH
 
 def predict(skill):
     """
@@ -37,7 +18,11 @@ def predict(skill):
     Args:
         skill (str): The skill text to classify (e.g. "TensorFlow")
     """
-    model, vectorizer = load_inference_artifacts()
+    try:
+        model, vectorizer = load_inference_artifacts(MODEL_PATH, VOCAB_PATH)
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        return
     
     # Run vectorization
     X = vectorizer([skill])
