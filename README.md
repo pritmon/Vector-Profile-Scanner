@@ -59,12 +59,12 @@ pip install -e .
 
 ### 1. Train the Model
 ```bash
-python3 src/train.py
+PYTHONPATH=. python3 -m src.train
 ```
 
 ### 2. Predict a Skill
 ```bash
-python3 src/predict.py "Vertex AI"
+PYTHONPATH=. python3 -m src.predict "Vertex AI"
 ```
 
 ### 3. Run Automated Tests

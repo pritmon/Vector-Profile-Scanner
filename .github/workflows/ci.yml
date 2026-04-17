@@ -28,7 +28,7 @@ jobs:
     - name: Train Initial Model
       run: |
         # Re-train using data/raw/skills.csv to ensure no crashes during artifact generation
-        python src/train.py
+        PYTHONPATH=. python -m src.train
 
     - name: Run Pytest Suite
       run: |
